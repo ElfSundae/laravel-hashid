@@ -1,0 +1,49 @@
+{
+    "name": "elfsundae/laravel-hashid",
+    "type": "library",
+    "description": "Laravel Hashid",
+    "keywords": ["laravel", "hashid"],
+    "homepage": "https://github.com/ElfSundae/laravel-hashid",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Elf Sundae",
+            "email": "elf.sundae@gmail.com",
+            "homepage": "https://0x123.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.6.4",
+        "illuminate/support": "5.*"
+    },
+    "require-dev": {
+        "mockery/mockery": "0.9.*",
+        "phpunit/phpunit": "~5.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "ElfSundae\\Laravel\\Hashid\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ElfSundae\\Laravel\\Hashid\\Test\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        },
+        "laravel": {
+            "providers": [
+                "ElfSundae\\Laravel\\Hashid\\HashidServiceProvider"
+            ],
+            "aliases": {
+                "Hashid": "ElfSundae\\Laravel\\Hashid\\Facades\\Hashid"
+            }
+        }
+    }
+}
