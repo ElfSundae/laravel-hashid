@@ -51,7 +51,7 @@ class HashidServiceProvider extends ServiceProvider
         });
         $this->app->alias('hashid', HashidManager::class);
 
-        $this->app->singleton('hashid.connection.base62', function ($app, $parameters) {
+        $this->app->bind('hashid.connection.base62', function ($app, $parameters) {
             return new Base62Connection(...$parameters);
         });
 
@@ -68,7 +68,7 @@ class HashidServiceProvider extends ServiceProvider
     protected function registerForConsole()
     {
         $this->publishes([
-            __DIR__.'/../config/hashid.php' => base_path('config/hashid.php'),
+            __DIR__.'/../config/hashid.php' => config_path('hashid.php'),
         ], 'hashid');
     }
 

@@ -12,7 +12,7 @@ class Base64Connection implements ConnectionInterface
      */
     public function encode($data)
     {
-        return strtr(base64_encode($data), ['+' => '-', '/' => '_', '=' => '']);
+        return urlsafe_base64_encode($data);
     }
 
     /**
@@ -23,6 +23,6 @@ class Base64Connection implements ConnectionInterface
      */
     public function decode($data)
     {
-        return base64_decode(strtr($data.str_repeat('=', (4 - strlen($data) % 4)), '-_', '+/'));
+        return urlsafe_base64_decode($data);
     }
 }
