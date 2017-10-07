@@ -86,7 +86,7 @@ class HashidManager extends Manager
     }
 
     /**
-     * Create a new connection instance.
+     * Create a new hashid connection instance.
      *
      * @param  array  $config
      * @return \ElfSundae\Laravel\Hashid\ConnectionInterface
