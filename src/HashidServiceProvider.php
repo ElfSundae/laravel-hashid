@@ -11,7 +11,7 @@ class HashidServiceProvider extends ServiceProvider
      *
      * @var bool
      */
-    protected $defer = false;
+    protected $defer = true;
 
     /**
      * Bootstrap the service provider.
@@ -50,6 +50,9 @@ class HashidServiceProvider extends ServiceProvider
             return new HashidManager($app);
         });
         $this->app->alias('hashid', HashidManager::class);
+
+        $this->app->singleton('hashid.connection.base62', Base62Connection::class);
+        $this->app->singleton('hashid.connection.base64', Base64Connection::class);
     }
 
     /**
@@ -71,6 +74,10 @@ class HashidServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return [];
+        return [
+            'hashid', HashidManager::class,
+            'hashid.connection.base62',
+            'hashid.connection.base64',
+        ];
     }
 }
