@@ -32,9 +32,24 @@ class HashidServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/hashid.php', 'hashid');
 
+        $this->registerServices();
+
         if ($this->app->runningInConsole()) {
             $this->registerForConsole();
         }
+    }
+
+    /**
+     * Register bindings.
+     *
+     * @return void
+     */
+    protected function registerServices()
+    {
+        $this->app->singleton('hashid', function ($app) {
+            return new HashidManager($app);
+        });
+        $this->app->alias('hashid', HashidManager::class);
     }
 
     /**
