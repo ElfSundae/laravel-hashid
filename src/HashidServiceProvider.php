@@ -45,7 +45,7 @@ class HashidServiceProvider extends ServiceProvider
     protected function registerForConsole()
     {
         $this->publishes([
-            __DIR__.'/../config/hashid.php' => config_path('hashid.php'),
+            __DIR__.'/../config/hashid.php' => base_path('config/hashid.php'),
         ], 'hashid');
     }
 
