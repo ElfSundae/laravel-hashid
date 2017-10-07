@@ -24,7 +24,7 @@ abstract class Connection implements ConnectionInterface
      * @param  \Illuminate\Foundation\Application  $app
      * @param  array  $config
      */
-    public function __construct($app, array $config)
+    public function __construct($app, array $config = [])
     {
         $this->app = $app;
         $this->config = $config;
