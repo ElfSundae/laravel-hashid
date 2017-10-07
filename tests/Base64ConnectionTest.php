@@ -14,8 +14,8 @@ class Base64ConnectionTest extends TestCase
 
     public function testEncodeAndDecode()
     {
-        $conn = new Base64Connection;
-        $this->assertSame('TGFyYXZlbA', $conn->encode('Laravel'));
-        $this->assertSame('Laravel', $conn->decode('TGFyYXZlbA'));
+        $connection = new Base64Connection;
+        $this->assertSame('TGFyYXZlbA', $connection->encode('Laravel'));
+        $this->assertSame('Laravel', $connection->decode('TGFyYXZlbA'));
     }
 }

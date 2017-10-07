@@ -28,13 +28,19 @@ return [
 
     'connections' => [
 
-        'base64' => [
-            'driver' => 'base64',
-        ],
-
         'base62' => [
             'driver' => 'base62',
-            'alphabet' => env('HASHID_BASE62_ALPHABET', '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
+            'characters' => env('HASHID_BASE62_CHARACTERS', \Tuupola\Base62::GMP),
+        ],
+
+        'base62-integer' => [
+            'driver' => 'base62',
+            'characters' => env('HASHID_BASE62_CHARACTERS', \Tuupola\Base62::GMP),
+            'integer' => true,
+        ],
+
+        'base64' => [
+            'driver' => 'base64',
         ],
 
     ],
