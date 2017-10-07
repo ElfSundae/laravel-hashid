@@ -75,7 +75,7 @@ class HashidManagerTest extends TestCase
         ]);
         $manager->extend('foo-driver', function ($app, $config, $name) {
             $this->assertSame($this->app, $app);
-            $this->assertEquals(['driver' => 'foo-driver', 'key' => 'value'], $config);
+            $this->assertEquals(['key' => 'value'], $config);
             $this->assertSame('foo', $name);
 
             return 'FooConnection';
@@ -99,7 +99,7 @@ class HashidManagerTest extends TestCase
         $connection = $manager->connection('foo');
         $this->assertInstanceOf(TestConnection::class, $connection);
         $this->assertSame($this->app, $connection->getApplication());
-        $this->assertEquals(['driver' => 'foo-driver', 'key' => 'value'], $connection->getConfig());
+        $this->assertEquals(['key' => 'value'], $connection->getConfig());
     }
 
     public function testGetConnections()

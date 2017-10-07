@@ -79,7 +79,7 @@ class HashidManager extends Manager
         if (isset($config['driver']) &&
             isset($this->customCreators[$driver = $config['driver']])
         ) {
-            return $this->customCreators[$driver]($this->app, $config, $name);
+            return $this->customCreators[$driver]($this->app, $this->getConfigWithoutDriver($config), $name);
         }
 
         return $this->createConnection($config);
@@ -102,9 +102,22 @@ class HashidManager extends Manager
         $driver = $config['driver'];
 
         if ($this->app->bound($key = "hashid.connection.{$driver}")) {
-            return $this->app->make($key, [$this->app, $config]);
+            return $this->app->make($key, [$this->app, $this->getConfigWithoutDriver($config)]);
         }
 
         throw new InvalidArgumentException("Unsupported driver [$driver]");
+    }
+
+    /**
+     * Get connection configuration without "driver" element.
+     *
+     * @param  array  $config
+     * @return array
+     */
+    protected function getConfigWithoutDriver($config)
+    {
+        unset($config['driver']);
+
+        return $config;
     }
 }
