@@ -51,8 +51,13 @@ class HashidServiceProvider extends ServiceProvider
         });
         $this->app->alias('hashid', HashidManager::class);
 
-        $this->app->singleton('hashid.connection.base62', Base62Connection::class);
-        $this->app->singleton('hashid.connection.base64', Base64Connection::class);
+        $this->app->singleton('hashid.connection.base62', function ($app, $parameters) {
+            return new Base62Connection(...$parameters);
+        });
+
+        $this->app->singleton('hashid.connection.base64', function ($app, $parameters) {
+            return new Base64Connection(...$parameters);
+        });
     }
 
     /**
