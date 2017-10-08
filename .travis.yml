@@ -7,12 +7,16 @@ php:
 
 env:
   matrix:
-    - COMPOSER_FLAGS="--prefer-lowest"
-    - COMPOSER_FLAGS=""
+    - TESTBENCH_VERSION="3.0.*"
+    - TESTBENCH_VERSION="3.1.*"
+    - TESTBENCH_VERSION="3.2.*"
+    - TESTBENCH_VERSION="3.3.*"
+    - TESTBENCH_VERSION="3.4.*"
+    - TESTBENCH_VERSION="3.5.*"
 
 before_script:
   - travis_retry composer self-update
-  - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-source
+  - travis_retry composer require orchestra/testbench:${TESTBENCH_VERSION} --dev --no-interaction
 
 script:
   - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
