@@ -106,9 +106,15 @@ class HashidManager extends Manager
                 return $this->app->make($key);
             }
 
-            $make = method_exists($this->app, 'makeWith') ? 'makeWith' : 'make';
+            // `Container::make($abstract, $parameters)` which can
+            // pass additional parameters to the constructor was removed
+            // in Laravel 5.4 (https://github.com/laravel/internals/issues/391),
+            // but then re-added as `makeWith()` in v5.4.16
+            // (https://github.com/laravel/framework/pull/18271). And in L55
+            // `makeWith()` is just an alias to `make()`.
+            $makeWith = method_exists($this->app, 'makeWith') ? 'makeWith' : 'make';
 
-            return $this->app->{$make}($key, [
+            return $this->app->{$makeWith}($key, [
                 'app' => $this->app,
                 'config' => $this->getConfigWithoutDriver($config),
             ]);
