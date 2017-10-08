@@ -102,6 +102,26 @@ class HashidManagerTest extends TestCase
         $this->assertEquals(['key' => 'value'], $connection->config);
     }
 
+    public function testCreateConnectionWithSharedBinding()
+    {
+        $manager = $this->getManager([
+            'connections' => [
+                'foo' => [
+                    'driver' => 'foo-driver',
+                    'key' => 'value',
+                ],
+            ],
+        ]);
+        $this->app->singleton('hashid.connection.foo-driver', function ($app) {
+            return new TestConnection($app, ['bar']);
+        });
+        $connection = $manager->connection('foo');
+        $this->assertSame($connection, $this->app['hashid.connection.foo-driver']);
+        $this->assertInstanceOf(TestConnection::class, $connection);
+        $this->assertSame($this->app, $connection->app);
+        $this->assertEquals(['bar'], $connection->config);
+    }
+
     public function testGetConnections()
     {
         $manager = $this->getManager();
@@ -129,7 +149,7 @@ class TestConnection
     public $app;
     public $config;
 
-    public function __construct($app, $config)
+    public function __construct($app = null, $config = null)
     {
         $this->app = $app;
         $this->config = $config;
