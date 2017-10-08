@@ -27,6 +27,7 @@ class HashidManagerTest extends TestCase
                 ],
             ],
         ]);
+        $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('A driver must be specified.');
         $manager->connection('foo');
     }
@@ -40,6 +41,7 @@ class HashidManagerTest extends TestCase
                 ],
             ],
         ]);
+        $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Unsupported driver [foo-driver]');
         $manager->connection('foo');
     }
