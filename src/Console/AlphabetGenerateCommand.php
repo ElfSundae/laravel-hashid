@@ -28,11 +28,9 @@ class AlphabetGenerateCommand extends Command
      */
     public function handle()
     {
-        for ($i = 0; $i < $this->getTimes(); $i++) {
-            $this->comment(
-                $this->generateRandomAlphabet($this->option('characters'))
-            );
-        }
+        $this->comment(
+            $this->generateRandomAlphabet($this->option('characters'), $this->getTimes())
+        );
     }
 
     /**
@@ -50,11 +48,19 @@ class AlphabetGenerateCommand extends Command
     /**
      * Generate random alphabet.
      *
+     * @param  string  $characters
+     * @param  int  $times
      * @return string
      */
-    protected function generateRandomAlphabet($characters)
+    protected function generateRandomAlphabet($characters, $times = 1)
     {
-        return str_shuffle(count_chars($characters, 3));
+        $result = [];
+
+        for ($i = 0; $i < $times; $i++) {
+            $result[] = str_shuffle(count_chars($characters, 3));
+        }
+
+        return implode(PHP_EOL, $result);
     }
 
     /**
