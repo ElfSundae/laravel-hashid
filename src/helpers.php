@@ -13,6 +13,34 @@ if (! function_exists('hashid')) {
     }
 }
 
+if (! function_exists('hashid_encode')) {
+    /**
+     * Encode the given data using hashid.
+     *
+     * @param  mixed  $data
+     * @param  string|null  $name
+     * @return mixed
+     */
+    function hashid_encode($data, $name = null)
+    {
+        return hashid($name)->encode($data);
+    }
+}
+
+if (! function_exists('hashid_decode')) {
+    /**
+     * Decode the given data using hashid.
+     *
+     * @param  mixed  $data
+     * @param  string|null  $name
+     * @return mixed
+     */
+    function hashid_decode($data, $name = null)
+    {
+        return hashid($name)->decode($data);
+    }
+}
+
 if (! function_exists('urlsafe_base64_encode')) {
     /**
      * Encodes the given data with base64, and returns an URL-safe string.
