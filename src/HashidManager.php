@@ -11,7 +11,7 @@ class HashidManager extends Manager
      * Get a hashid connection instance.
      *
      * @param  string|null  $name
-     * @return \ElfSundae\Laravel\Hashid\ConnectionInterface
+     * @return mixed
      */
     public function connection($name = null)
     {
@@ -89,7 +89,7 @@ class HashidManager extends Manager
      * Create a new hashid connection instance.
      *
      * @param  array  $config
-     * @return \ElfSundae\Laravel\Hashid\ConnectionInterface
+     * @return mixed
      *
      * @throws \InvalidArgumentException
      */
@@ -102,7 +102,16 @@ class HashidManager extends Manager
         $driver = $config['driver'];
 
         if ($this->app->bound($key = "hashid.connection.{$driver}")) {
-            return $this->app->make($key, [$this->app, $this->getConfigWithoutDriver($config)]);
+            if ($this->app->isShared($key)) {
+                return $this->app->make($key);
+            }
+
+            $make = method_exists($this->app, 'makeWith') ? 'makeWith' : 'make';
+
+            return $this->app->{$make}($key, [
+                'app' => $this->app,
+                'config' => $this->getConfigWithoutDriver($config),
+            ]);
         }
 
         throw new InvalidArgumentException("Unsupported driver [$driver]");

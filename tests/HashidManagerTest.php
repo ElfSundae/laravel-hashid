@@ -93,13 +93,11 @@ class HashidManagerTest extends TestCase
                 ],
             ],
         ]);
-        $this->app->bind('hashid.connection.foo-driver', function ($app, $parameters) {
-            return new TestConnection(...$parameters);
-        });
+        $this->app->alias(TestConnection::class, 'hashid.connection.foo-driver');
         $connection = $manager->connection('foo');
         $this->assertInstanceOf(TestConnection::class, $connection);
-        $this->assertSame($this->app, $connection->getApplication());
-        $this->assertEquals(['key' => 'value'], $connection->getConfig());
+        $this->assertSame($this->app, $connection->app);
+        $this->assertEquals(['key' => 'value'], $connection->config);
     }
 
     public function testGetConnections()
@@ -124,25 +122,14 @@ class HashidManagerTest extends TestCase
     }
 }
 
-class TestConnection extends Connection
+class TestConnection
 {
-    public function getApplication()
-    {
-        return $this->app;
-    }
+    public $app;
+    public $config;
 
-    public function getConfig()
+    public function __construct($app, $config)
     {
-        return $this->config;
-    }
-
-    public function encode($data)
-    {
-        return $data;
-    }
-
-    public function decode($data)
-    {
-        return $data;
+        $this->app = $app;
+        $this->config = $config;
     }
 }

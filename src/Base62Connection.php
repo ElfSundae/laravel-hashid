@@ -5,7 +5,7 @@ namespace ElfSundae\Laravel\Hashid;
 use Tuupola\Base62;
 use Illuminate\Support\Arr;
 
-class Base62Connection extends Connection
+class Base62Connection implements ConnectionInterface
 {
     /**
      * The Base62 instance.
@@ -24,13 +24,10 @@ class Base62Connection extends Connection
     /**
      * Create a new hashid connection instance.
      *
-     * @param  \Illuminate\Foundation\Application  $app
      * @param  array  $config
      */
-    public function __construct($app, array $config = [])
+    public function __construct(array $config = [])
     {
-        parent::__construct($app, $config);
-
         $this->base62 = new Base62(
             array_filter(Arr::only($config, ['characters']))
         );
@@ -46,7 +43,7 @@ class Base62Connection extends Connection
      */
     public function encode($data)
     {
-        return $this->base62->encode($data);
+        return $this->base62->encode($this->integer ? (int) $data : $data);
     }
 
     /**

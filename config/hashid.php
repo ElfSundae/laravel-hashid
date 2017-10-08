@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => '',
+    'default' => 'base64',
 
     /*
     |--------------------------------------------------------------------------
@@ -41,6 +41,15 @@ return [
 
         'base64' => [
             'driver' => 'base64',
+        ],
+
+        'base64-integer' => [
+            'driver' => 'base64',
+            'integer' => true,
+        ],
+
+        'hex' => [
+            'driver' => 'hex',
         ],
 
     ],

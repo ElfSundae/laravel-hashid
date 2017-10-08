@@ -2,6 +2,7 @@
 
 namespace ElfSundae\Laravel\Hashid;
 
+use ReflectionClass;
 use Illuminate\Support\ServiceProvider;
 
 class HashidServiceProvider extends ServiceProvider
@@ -40,24 +41,55 @@ class HashidServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register bindings.
+     * Register service bindings.
      *
      * @return void
      */
     protected function registerServices()
     {
-        $this->app->singleton('hashid', function ($app) {
-            return new HashidManager($app);
-        });
-        $this->app->alias('hashid', HashidManager::class);
+        foreach ($this->getSingletonBindings() as $abstract => $concrete) {
+            $this->app->singleton($abstract, function ($app) use ($concrete) {
+                $reflector = new ReflectionClass($concrete);
 
-        $this->app->bind('hashid.connection.base62', function ($app, $parameters) {
-            return new Base62Connection(...$parameters);
-        });
+                if (is_null($reflector->getConstructor())) {
+                    return new $concrete;
+                }
 
-        $this->app->singleton('hashid.connection.base64', function ($app, $parameters) {
-            return new Base64Connection(...$parameters);
-        });
+                return $reflector->newInstanceArgs([$app]);
+            });
+
+            $this->app->alias($abstract, $concrete);
+        }
+
+        foreach ($this->getClassAliases() as $abstract => $alias) {
+            $this->app->alias($abstract, $alias);
+        }
+    }
+
+    /**
+     * Get singleton bindings to be registered.
+     *
+     * @return array
+     */
+    protected function getSingletonBindings()
+    {
+        return [
+            'hashid' => HashidManager::class,
+            'hashid.connection.hex' => HexConnection::class,
+        ];
+    }
+
+    /**
+     * Get class aliases to be registered.
+     *
+     * @return array
+     */
+    protected function getClassAliases()
+    {
+        return [
+            Base62Connection::class => 'hashid.connection.base62',
+            Base64Connection::class => 'hashid.connection.base64',
+        ];
     }
 
     /**
@@ -81,8 +113,6 @@ class HashidServiceProvider extends ServiceProvider
     {
         return [
             'hashid', HashidManager::class,
-            'hashid.connection.base62',
-            'hashid.connection.base64',
         ];
     }
 }

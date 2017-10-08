@@ -2,12 +2,31 @@
 
 namespace ElfSundae\Laravel\Hashid;
 
+use Illuminate\Support\Arr;
+
 class Base64Connection implements ConnectionInterface
 {
     /**
-     * Encodes the given data with base64, and returns an URL-safe string.
+     * Indicates encoding to integer.
      *
-     * @param  string  $data
+     * @var bool
+     */
+    protected $integer = false;
+
+    /**
+     * Create a new hashid connection instance.
+     *
+     * @param  array  $config
+     */
+    public function __construct(array $config = [])
+    {
+        $this->integer = Arr::get($config, 'integer', false);
+    }
+
+    /**
+     * Encode the given string.
+     *
+     * @param  mixed  $data
      * @return string
      */
     public function encode($data)
@@ -16,13 +35,15 @@ class Base64Connection implements ConnectionInterface
     }
 
     /**
-     * Decodes a base64 encoded data.
+     * Decode the base64 encoded data.
      *
      * @param  string  $data
-     * @return string
+     * @return mixed
      */
     public function decode($data)
     {
-        return urlsafe_base64_decode($data);
+        $data = urlsafe_base64_decode($data);
+
+        return $this->integer ? (int) $data : $data;
     }
 }
