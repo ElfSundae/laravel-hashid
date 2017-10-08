@@ -17,6 +17,8 @@ if (! function_exists('urlsafe_base64_encode')) {
     /**
      * Encodes the given data with base64, and returns an URL-safe string.
      *
+     * @see https://github.com/ElfSundae/laravel-helper
+     *
      * @param  string  $data
      * @return string
      */
@@ -29,6 +31,8 @@ if (! function_exists('urlsafe_base64_encode')) {
 if (! function_exists('urlsafe_base64_decode')) {
     /**
      * Decodes a base64 encoded data.
+     *
+     * @see https://github.com/ElfSundae/laravel-helper
      *
      * @param  string  $data
      * @param  bool  $strict
@@ -43,6 +47,7 @@ if (! function_exists('urlsafe_base64_decode')) {
 if (! function_exists('config_path')) {
     /**
      * Get the configuration path.
+     * For Lumen compatible.
      *
      * @param  string  $path
      * @return string
