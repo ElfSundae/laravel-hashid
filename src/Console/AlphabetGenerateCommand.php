@@ -29,7 +29,10 @@ class AlphabetGenerateCommand extends Command
     public function handle()
     {
         $this->comment(
-            $this->generateRandomAlphabet($this->option('characters'), $this->getTimes())
+            $this->generateRandomAlphabet(
+                (string) $this->option('characters'),
+                $this->getTimes()
+            )
         );
     }
 
