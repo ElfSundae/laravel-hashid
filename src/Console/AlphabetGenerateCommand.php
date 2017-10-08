@@ -28,11 +28,23 @@ class AlphabetGenerateCommand extends Command
      */
     public function handle()
     {
-        for ($i = 0; $i < $this->option('times'); $i++) {
+        for ($i = 0; $i < $this->getTimes(); $i++) {
             $this->comment(
                 $this->generateRandomAlphabet($this->option('characters'))
             );
         }
+    }
+
+    /**
+     * Get "times" option value.
+     *
+     * @return int
+     */
+    protected function getTimes()
+    {
+        $times = (int) $this->option('times');
+
+        return max(1, min($times, 3));
     }
 
     /**
