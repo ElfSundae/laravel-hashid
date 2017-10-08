@@ -3,17 +3,16 @@
 namespace ElfSundae\Laravel\Hashid\Console;
 
 use Illuminate\Console\Command;
+use Symfony\Component\Console\Input\InputOption;
 
 class AlphabetGenerateCommand extends Command
 {
     /**
-     * The name and signature of the console command.
+     * The console command name.
      *
      * @var string
      */
-    protected $signature = 'hashid:alphabet
-        {--c|characters=0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ : Use custom characters}
-        {--t|times=1 : Times to generate}';
+    protected $name = 'hashid:alphabet';
 
     /**
      * The console command description.
@@ -44,5 +43,18 @@ class AlphabetGenerateCommand extends Command
     protected function generateRandomAlphabet($characters)
     {
         return str_shuffle(count_chars($characters, 3));
+    }
+
+    /**
+     * Get the console command options.
+     *
+     * @return array
+     */
+    protected function getOptions()
+    {
+        return [
+            ['characters', 'c', InputOption::VALUE_OPTIONAL, 'Use custom characters', '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'],
+            ['times', 't', InputOption::VALUE_OPTIONAL, 'Times to generate', 1],
+        ];
     }
 }
