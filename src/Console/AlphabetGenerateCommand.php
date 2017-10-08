@@ -44,7 +44,7 @@ class AlphabetGenerateCommand extends Command
     {
         $times = (int) $this->option('times');
 
-        return max(1, min($times, 3));
+        return max(1, min($times, 100));
     }
 
     /**
