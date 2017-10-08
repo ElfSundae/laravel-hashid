@@ -1,5 +1,18 @@
 <?php
 
+if (! function_exists('hashid')) {
+    /**
+     * Get a hashid connection instance.
+     *
+     * @param  string|null  $name
+     * @return mixed
+     */
+    function hashid($name = null)
+    {
+        return app('hashid')->connection($name);
+    }
+}
+
 if (! function_exists('urlsafe_base64_encode')) {
     /**
      * Encodes the given data with base64, and returns an URL-safe string.
