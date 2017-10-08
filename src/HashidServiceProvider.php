@@ -4,6 +4,7 @@ namespace ElfSundae\Laravel\Hashid;
 
 use ReflectionClass;
 use Illuminate\Support\ServiceProvider;
+use ElfSundae\Laravel\Hashid\Console\AlphabetGenerateCommand;
 
 class HashidServiceProvider extends ServiceProvider
 {
@@ -102,6 +103,10 @@ class HashidServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/hashid.php' => config_path('hashid.php'),
         ], 'hashid');
+
+        $this->commands([
+            AlphabetGenerateCommand::class,
+        ]);
     }
 
     /**
