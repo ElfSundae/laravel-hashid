@@ -10,7 +10,9 @@ abstract class ConnectionTestCase extends TestCase
 
     protected function getConnection($config = [], $connection = null)
     {
-        return $this->app->make($connection ?: $this->connection, [
+        $make = method_exists($this->app, 'makeWith') ? 'makeWith' : 'make';
+
+        return $this->app->{$make}($connection ?: $this->connection, [
             'app' => $this->app,
             'config' => $config,
         ]);
