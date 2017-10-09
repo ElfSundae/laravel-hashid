@@ -19,7 +19,7 @@ class AlphabetGenerateCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Generate a random alphabet for Hashid encoding';
+    protected $description = 'Generate a random alphabet for Hashid encoder';
 
     /**
      * Execute the console command.
