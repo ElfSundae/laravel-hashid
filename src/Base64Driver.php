@@ -4,27 +4,27 @@ namespace ElfSundae\Laravel\Hashid;
 
 use Illuminate\Support\Arr;
 
-class Base64Connection implements ConnectionInterface
+class Base64Driver implements DriverInterface
 {
     /**
-     * Indicates encoding to integer.
+     * Indicates integer encoding.
      *
      * @var bool
      */
     protected $integer = false;
 
     /**
-     * Create a new hashid connection instance.
+     * Create a new hashid driver instance.
      *
      * @param  array  $config
      */
     public function __construct(array $config = [])
     {
-        $this->integer = Arr::get($config, 'integer', false);
+        $this->integer = Arr::get($config, 'integer', $this->integer);
     }
 
     /**
-     * Encode the given string.
+     * Encode the data.
      *
      * @param  mixed  $data
      * @return string
@@ -35,7 +35,7 @@ class Base64Connection implements ConnectionInterface
     }
 
     /**
-     * Decode the base64 encoded data.
+     * Decode the data.
      *
      * @param  string  $data
      * @return mixed

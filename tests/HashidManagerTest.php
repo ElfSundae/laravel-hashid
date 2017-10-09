@@ -3,7 +3,6 @@
 namespace ElfSundae\Laravel\Hashid\Test;
 
 use Orchestra\Testbench\TestCase;
-use ElfSundae\Laravel\Hashid\Connection;
 use ElfSundae\Laravel\Hashid\HashidManager;
 
 class HashidManagerTest extends TestCase
@@ -22,9 +21,7 @@ class HashidManagerTest extends TestCase
     {
         $manager = $this->getManager([
             'connections' => [
-                'foo' => [
-                    'key' => 'value',
-                ],
+                'foo' => [],
             ],
         ]);
         $this->expectException(\InvalidArgumentException::class);
@@ -55,14 +52,14 @@ class HashidManagerTest extends TestCase
                 ],
             ],
         ]);
-        $manager->extend('foo', function ($app, $config, $name) {
-            $this->assertSame($this->app, $app);
+        $manager->extend('foo', function ($config, $app, $name) {
             $this->assertEquals(['key' => 'value'], $config);
+            $this->assertSame($this->app, $app);
             $this->assertSame('foo', $name);
 
             return 'FooConnection';
         });
-        $this->assertEquals('FooConnection', $manager->connection('foo'));
+        $this->assertSame('FooConnection', $manager->connection('foo'));
     }
 
     public function testCreateConnectionWithCustomDriverClosure()
@@ -75,17 +72,17 @@ class HashidManagerTest extends TestCase
                 ],
             ],
         ]);
-        $manager->extend('foo-driver', function ($app, $config, $name) {
-            $this->assertSame($this->app, $app);
+        $manager->extend('foo-driver', function ($config, $app, $name) {
             $this->assertEquals(['key' => 'value'], $config);
+            $this->assertSame($this->app, $app);
             $this->assertSame('foo', $name);
 
             return 'FooConnection';
         });
-        $this->assertEquals('FooConnection', $manager->connection('foo'));
+        $this->assertSame('FooConnection', $manager->connection('foo'));
     }
 
-    public function testCreateConnectionWithBinding()
+    public function testCreateConnectionWithDriverBinding()
     {
         $manager = $this->getManager([
             'connections' => [
@@ -95,14 +92,14 @@ class HashidManagerTest extends TestCase
                 ],
             ],
         ]);
-        $this->app->alias(TestConnection::class, 'hashid.connection.foo-driver');
+        $this->app->alias(TestDriver::class, 'hashid.driver.foo-driver');
         $connection = $manager->connection('foo');
-        $this->assertInstanceOf(TestConnection::class, $connection);
-        $this->assertSame($this->app, $connection->app);
+        $this->assertInstanceOf(TestDriver::class, $connection);
         $this->assertEquals(['key' => 'value'], $connection->config);
+        $this->assertSame($this->app, $connection->app);
     }
 
-    public function testCreateConnectionWithSharedBinding()
+    public function testCreateConnectionWithSharedDriverBinding()
     {
         $manager = $this->getManager([
             'connections' => [
@@ -112,14 +109,14 @@ class HashidManagerTest extends TestCase
                 ],
             ],
         ]);
-        $this->app->singleton('hashid.connection.foo-driver', function ($app) {
-            return new TestConnection($app, ['bar']);
+        $this->app->singleton('hashid.driver.foo-driver', function ($app) {
+            return new TestDriver($app, ['bar']);
         });
         $connection = $manager->connection('foo');
-        $this->assertSame($connection, $this->app['hashid.connection.foo-driver']);
-        $this->assertInstanceOf(TestConnection::class, $connection);
-        $this->assertSame($this->app, $connection->app);
+        $this->assertSame($connection, $this->app['hashid.driver.foo-driver']);
+        $this->assertInstanceOf(TestDriver::class, $connection);
         $this->assertEquals(['bar'], $connection->config);
+        $this->assertSame($this->app, $connection->app);
     }
 
     public function testGetConnections()
@@ -133,7 +130,10 @@ class HashidManagerTest extends TestCase
         });
         $manager->connection('foo');
         $manager->connection('bar');
-        $this->assertEquals(['foo' => 'FooConnection', 'bar' => 'BarConnection'], $manager->getConnections());
+        $this->assertEquals([
+            'foo' => 'FooConnection',
+            'bar' => 'BarConnection',
+        ], $manager->getConnections());
     }
 
     protected function getManager($config = [])
@@ -144,7 +144,7 @@ class HashidManagerTest extends TestCase
     }
 }
 
-class TestConnection
+class TestDriver
 {
     public $app;
     public $config;

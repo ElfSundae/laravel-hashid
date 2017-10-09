@@ -2,10 +2,10 @@
 
 namespace ElfSundae\Laravel\Hashid;
 
-class HexConnection implements ConnectionInterface
+class HexDriver implements DriverInterface
 {
     /**
-     * Encode the given integer.
+     * Encode the integer.
      *
      * @param  mixed  $data
      * @return string

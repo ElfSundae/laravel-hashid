@@ -103,7 +103,7 @@ class HashidServiceProvider extends ServiceProvider
     {
         return [
             'hashid' => HashidManager::class,
-            'hashid.connection.hex' => HexConnection::class,
+            'hashid.driver.hex' => HexDriver::class,
         ];
     }
 
@@ -115,8 +115,8 @@ class HashidServiceProvider extends ServiceProvider
     protected function getClassAliases()
     {
         return [
-            Base62Connection::class => 'hashid.connection.base62',
-            Base64Connection::class => 'hashid.connection.base64',
+            Base62Driver::class => 'hashid.driver.base62',
+            Base64Driver::class => 'hashid.driver.base64',
         ];
     }
 
@@ -142,8 +142,8 @@ class HashidServiceProvider extends ServiceProvider
     public function provides()
     {
         return array_merge(
-            array_keys($singletons = $this->getSingletonBindings()),
-            array_values($singletons)
+            array_keys($bindings = $this->getSingletonBindings()),
+            array_values($bindings)
         );
     }
 }

@@ -2,10 +2,10 @@
 
 namespace ElfSundae\Laravel\Hashid;
 
-interface ConnectionInterface
+interface DriverInterface
 {
     /**
-     * Encode the given data.
+     * Encode the data.
      *
      * @param  mixed  $data
      * @return mixed
@@ -13,7 +13,7 @@ interface ConnectionInterface
     public function encode($data);
 
     /**
-     * Decode the given data.
+     * Decode the data.
      *
      * @param  mixed  $data
      * @return mixed
