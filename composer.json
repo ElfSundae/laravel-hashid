@@ -16,7 +16,8 @@
         "php": ">=5.6.4",
         "illuminate/support": "5.*",
         "illuminate/console": "5.*",
-        "tuupola/base62": "~0.8"
+        "elfsundae/urlsafe-base64": "~1.0",
+        "tuupola/base62": "~0.9"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.4",
