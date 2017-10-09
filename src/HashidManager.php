@@ -100,18 +100,37 @@ class HashidManager extends Manager
         }
 
         if ($this->app->bound($key = "hashid.driver.{$driver}")) {
-            if ($this->app->isShared($key)) {
-                return $this->app->make($key);
-            }
-
-            $makeWith = method_exists($this->app, 'makeWith') ? 'makeWith' : 'make';
-
-            return $this->app->{$makeWith}($key, [
+            return $this->resolveFromContainer($key, [
                 'app' => $this->app,
                 'config' => $config,
             ]);
         }
 
         throw new InvalidArgumentException("Unsupported driver [$driver]");
+    }
+
+    /**
+     * Resolve the given type from the container.
+     *
+     * NOTE:
+     * `Container::make($abstract, $parameters)` which can pass additional
+     * parameters to the constructor was removed in Laravel 5.4
+     * (https://github.com/laravel/internals/issues/391), but then re-added
+     * as `makeWith()` in v5.4.16 (https://github.com/laravel/framework/pull/18271).
+     * And in L55 the `makeWith()` is just an alias to `make()`.
+     *
+     * @param  string  $abstract
+     * @param  array  $parameters
+     * @return mixed
+     */
+    protected function resolveFromContainer($abstract, array $parameters = [])
+    {
+        if ($this->app->isShared($abstract)) {
+            return $this->app->make($abstract);
+        }
+
+        $makeWith = method_exists($this->app, 'makeWith') ? 'makeWith' : 'make';
+
+        return $this->app->{$makeWith}($abstract, $parameters);
     }
 }
