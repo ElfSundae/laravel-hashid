@@ -4,7 +4,7 @@ namespace ElfSundae\Laravel\Hashid;
 
 use ReflectionClass;
 use Illuminate\Support\ServiceProvider;
-use ElfSundae\Laravel\Hashid\Console\AlphabetGenerateCommand;
+use Laravel\Lumen\Application as LumenApplication;
 
 class HashidServiceProvider extends ServiceProvider
 {
@@ -32,12 +32,27 @@ class HashidServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/hashid.php', 'hashid');
+        $this->setupAssets();
 
         $this->registerServices();
+        $this->registerCommands();
+    }
+
+    /**
+     * Setup package assets.
+     *
+     * @return void
+     */
+    protected function setupAssets()
+    {
+        if ($this->app instanceof LumenApplication) {
+            $this->app->configure('hashid');
+        }
+
+        $this->mergeConfigFrom($config = __DIR__.'/../config/hashid.php', 'hashid');
 
         if ($this->app->runningInConsole()) {
-            $this->registerForConsole();
+            $this->publishes([$config => config_path('hashid.php')], 'hashid');
         }
     }
 
@@ -50,13 +65,7 @@ class HashidServiceProvider extends ServiceProvider
     {
         foreach ($this->getSingletonBindings() as $abstract => $concrete) {
             $this->app->singleton($abstract, function ($app) use ($concrete) {
-                $reflector = new ReflectionClass($concrete);
-
-                if (is_null($reflector->getConstructor())) {
-                    return new $concrete;
-                }
-
-                return $reflector->newInstanceArgs([$app]);
+                return $this->createInstance($concrete, [$app]);
             });
 
             $this->app->alias($abstract, $concrete);
@@ -65,6 +74,24 @@ class HashidServiceProvider extends ServiceProvider
         foreach ($this->getClassAliases() as $abstract => $alias) {
             $this->app->alias($abstract, $alias);
         }
+    }
+
+    /**
+     * Create a new instance from class name.
+     *
+     * @param  string  $class
+     * @param  array  $args
+     * @return mixed
+     */
+    protected function createInstance($class, array $args = [])
+    {
+        $reflector = new ReflectionClass($class);
+
+        if (is_null($reflector->getConstructor())) {
+            return new $class;
+        }
+
+        return $reflector->newInstanceArgs($args);
     }
 
     /**
@@ -94,19 +121,17 @@ class HashidServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register for the console application.
+     * Register console commands.
      *
      * @return void
      */
-    protected function registerForConsole()
+    protected function registerCommands()
     {
-        $this->publishes([
-            __DIR__.'/../config/hashid.php' => config_path('hashid.php'),
-        ], 'hashid');
-
-        $this->commands([
-            AlphabetGenerateCommand::class,
-        ]);
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                Console\AlphabetGenerateCommand::class,
+            ]);
+        }
     }
 
     /**
@@ -116,8 +141,9 @@ class HashidServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return [
-            'hashid', HashidManager::class,
-        ];
+        return array_merge(
+            array_keys($singletons = $this->getSingletonBindings()),
+            array_values($singletons)
+        );
     }
 }
