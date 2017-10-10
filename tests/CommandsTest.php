@@ -9,7 +9,12 @@ class CommandsTest extends TestCase
 {
     public function testAlphabetGenerateCommand()
     {
-        $this->assertSame(0, $this->getArtisan()->call('hashid:alphabet'));
+        $this->assertSame(0, $this->callCommand('hashid:alphabet'));
+    }
+
+    protected function callCommand($command)
+    {
+        return $this->getArtisan()->call($command);
     }
 
     protected function getArtisan()

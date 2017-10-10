@@ -18,34 +18,51 @@ abstract class DriverTestCase extends TestCase
         ]);
     }
 
-    protected function callEncodingString($driver = null, $times = 1)
+    protected function assertReversible($data, $driver = null)
     {
         $driver = $driver ?: $this->makeDriver();
-
-        for ($i = 0; $i < $times; $i++) {
-            $data = random_bytes(random_int(0, 128));
-            $decoded = $driver->decode($driver->encode($data));
-            $this->assertSame($data, $decoded);
-        }
-    }
-
-    protected function callEncodingInteger($driver = null, $times = 1)
-    {
-        $driver = $driver ?: $this->makeDriver();
-
-        for ($i = 0; $i < $times; $i++) {
-            $data = random_int(0, PHP_INT_MAX);
-            $decoded = $driver->decode($driver->encode($data));
-            $this->assertSame($data, $decoded);
-        }
-    }
-
-    protected function callEncodingMaxInteger($driver = null)
-    {
-        $driver = $driver ?: $this->makeDriver();
-
-        $data = PHP_INT_MAX;
-        $decoded = $driver->decode($driver->encode($data));
+        $encoded = $driver->encode($data);
+        $decoded = $driver->decode($encoded);
         $this->assertSame($data, $decoded);
+    }
+
+    protected function assertUniformEncoding($data, $driver = null)
+    {
+        $driver = $driver ?: $this->makeDriver();
+        $encoded1 = $driver->encode($data);
+        $encoded2 = $driver->encode($data);
+        $this->assertSame($encoded1, $encoded2);
+    }
+
+    protected function runForBytes($driver = null)
+    {
+        $this->runForRandomBytes($driver);
+        $this->runForLeadingZeroBytes($driver);
+        // $this->runForLeadingNullTerminatorBytes($driver);
+    }
+
+    protected function runForRandomBytes($driver = null)
+    {
+        $data = random_bytes(random_int(1, 128));
+        $this->assertReversible($data, $driver);
+    }
+
+    protected function runForLeadingZeroBytes($driver = null)
+    {
+        $data = hex2bin("03486eea2de87439");
+        $this->assertReversible($data, $driver);
+    }
+
+    protected function runForLeadingNullTerminatorBytes($driver = null)
+    {
+        $data = hex2bin("00616263313233");
+        $this->assertReversible($data, $driver);
+    }
+
+    protected function runForIntegers($driver = null)
+    {
+        $this->assertReversible(random_int(0, PHP_INT_MAX), $driver);
+        $this->assertReversible(0, $driver);
+        $this->assertReversible(PHP_INT_MAX, $driver);
     }
 }

@@ -15,19 +15,18 @@ class Base62DriverTest extends DriverTestCase
 
     public function testEncoding()
     {
-        $this->callEncodingString($this->makeDriver(), 10);
-        $this->callEncodingInteger($integerDriver = $this->makeDriver(['integer' => true]), 10);
-        $this->callEncodingMaxInteger($integerDriver);
+        $this->runForBytes();
+        $this->runForIntegers($this->makeDriver(['integer' => true]));
     }
 
     public function testEncodingWithCustomCharacters()
     {
-        $config = [
+        $this->runForBytes($this->makeDriver([
             'characters' => str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
-        ];
-
-        $this->callEncodingString($this->makeDriver($config));
-        $this->callEncodingInteger($integerDriver = $this->makeDriver(['integer' => true] + $config));
-        $this->callEncodingMaxInteger($integerDriver);
+        ]));
+        $this->runForIntegers($this->makeDriver([
+            'characters' => str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
+            'integer' => true,
+        ]));
     }
 }

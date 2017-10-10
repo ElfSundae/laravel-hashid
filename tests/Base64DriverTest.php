@@ -15,8 +15,7 @@ class Base64DriverTest extends DriverTestCase
 
     public function testEncoding()
     {
-        $this->callEncodingString($this->makeDriver(), 10);
-        $this->callEncodingInteger($integerDriver = $this->makeDriver(['integer' => true]), 10);
-        $this->callEncodingMaxInteger($integerDriver);
+        $this->runForBytes();
+        $this->runForIntegers($this->makeDriver(['integer' => true]));
     }
 }
