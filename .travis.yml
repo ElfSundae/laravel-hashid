@@ -6,17 +6,19 @@ php:
   - 7.1
 
 env:
+  global:
+    - PHPUNIT_VERSION="~5.4"
   matrix:
-    - TESTBENCH_VERSION="3.0.*" PHP_VERSION=""    PHPUNIT_VERSION="~5.4"
-    - TESTBENCH_VERSION="3.1.*" PHP_VERSION=""    PHPUNIT_VERSION="~5.4"
-    - TESTBENCH_VERSION="3.2.*" PHP_VERSION=""    PHPUNIT_VERSION="~5.4"
-    - TESTBENCH_VERSION="3.3.*" PHP_VERSION=""    PHPUNIT_VERSION="~5.4"
-    - TESTBENCH_VERSION="3.4.*" PHP_VERSION=""    PHPUNIT_VERSION="~5.4"
-    - TESTBENCH_VERSION="3.5.*" PHP_VERSION="7.0" PHPUNIT_VERSION="~6.0"
+    - TESTBENCH_VERSION="3.0.*"
+    - TESTBENCH_VERSION="3.1.*"
+    - TESTBENCH_VERSION="3.2.*"
+    - TESTBENCH_VERSION="3.3.*"
+    - TESTBENCH_VERSION="3.4.*"
+    - TESTBENCH_VERSION="3.5.*" PHPUNIT_VERSION="~6.0" PHP_MIN_VERSION="7.0"
 
 before_script:
-  - if [[ ${TRAVIS_PHP_VERSION:0:3} < ${PHP_VERSION} ]]; then phpenv global ${PHP_VERSION}; fi
-  - travis_retry composer self-update
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} < ${PHP_MIN_VERSION} ]]; then phpenv global ${PHP_MIN_VERSION}; fi
+  - composer self-update
   - travis_retry composer require orchestra/testbench:${TESTBENCH_VERSION} phpunit/phpunit:${PHPUNIT_VERSION} --no-interaction
 
 script:
