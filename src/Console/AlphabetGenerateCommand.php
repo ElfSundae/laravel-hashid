@@ -22,6 +22,13 @@ class AlphabetGenerateCommand extends Command
     protected $description = 'Generate a random alphabet for Hashid encoder';
 
     /**
+     * The default characters.
+     *
+     * @var string
+     */
+    protected $defaultCharacters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+    /**
      * Execute the console command.
      *
      * @return mixed
@@ -30,7 +37,7 @@ class AlphabetGenerateCommand extends Command
     {
         $this->comment(
             $this->generateRandomAlphabet(
-                $this->option('characters'),
+                (string) $this->option('characters') ?: $this->defaultCharacters,
                 $this->getTimes()
             )
         );
@@ -74,7 +81,7 @@ class AlphabetGenerateCommand extends Command
     protected function getOptions()
     {
         return [
-            ['characters', 'c', InputOption::VALUE_OPTIONAL, 'Use custom characters', '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'],
+            ['characters', 'c', InputOption::VALUE_OPTIONAL, 'Use custom characters', $this->defaultCharacters],
             ['times', 't', InputOption::VALUE_OPTIONAL, 'Times to generate', 1],
         ];
     }

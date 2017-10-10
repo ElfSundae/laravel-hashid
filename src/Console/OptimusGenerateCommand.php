@@ -33,7 +33,7 @@ class OptimusGenerateCommand extends Command
             ['prime', 'inverse', 'random'],
             $this->generateOptimusNumbers(
                 $this->getTimes(),
-                $this->option('prime')
+                (int) $this->option('prime') ?: null
             )
         );
     }
@@ -54,17 +54,11 @@ class OptimusGenerateCommand extends Command
      * Generate Optimus numbers.
      *
      * @param  int  $times
-     * @param  mixed  $prime
+     * @param  int  $prime
      * @return array
      */
     protected function generateOptimusNumbers($times = 1, $prime = null)
     {
-        if ($prime = (int) $prime) {
-            $times = 1;
-        } else {
-            $prime = null;
-        }
-
         $result = [];
 
         for ($i = 0; $i < $times; $i++) {
