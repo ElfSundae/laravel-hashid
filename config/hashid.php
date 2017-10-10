@@ -30,12 +30,12 @@ return [
 
         'base62' => [
             'driver' => 'base62',
-            'characters' => env('HASHID_BASE62_CHARACTERS', '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
+            'characters' => env('HASHID_BASE62_CHARACTERS', '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'),
         ],
 
         'base62.integer' => [
             'driver' => 'base62.integer',
-            'characters' => env('HASHID_BASE62_CHARACTERS', '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
+            'characters' => env('HASHID_BASE62_CHARACTERS', '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'),
         ],
 
         'base64' => [
