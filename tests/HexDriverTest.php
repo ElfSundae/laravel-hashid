@@ -3,19 +3,13 @@
 namespace ElfSundae\Laravel\Hashid\Test;
 
 use ElfSundae\Laravel\Hashid\HexDriver;
+use ElfSundae\Laravel\Hashid\HexIntegerDriver;
 
 class HexDriverTest extends DriverTestCase
 {
-    protected $driver = HexDriver::class;
-
-    public function testInstantiation()
-    {
-        $this->assertInstanceOf(HexDriver::class, $this->makeDriver());
-    }
-
     public function testEncoding()
     {
-        $this->runForBytes();
-        $this->runForIntegers($this->makeDriver(['integer' => true]));
+        $this->runForBytes(HexDriver::class);
+        $this->runForIntegers(HexIntegerDriver::class);
     }
 }

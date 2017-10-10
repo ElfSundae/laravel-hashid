@@ -2,7 +2,7 @@
 
 namespace ElfSundae\Laravel\Hashid;
 
-class Base64Driver implements DriverInterface
+class HexIntegerDriver implements DriverInterface
 {
     /**
      * Encode the data.
@@ -12,17 +12,17 @@ class Base64Driver implements DriverInterface
      */
     public function encode($data)
     {
-        return urlsafe_base64_encode($data);
+        return dechex($data);
     }
 
     /**
      * Decode the data.
      *
      * @param  mixed  $data
-     * @return string
+     * @return int
      */
     public function decode($data)
     {
-        return urlsafe_base64_decode($data);
+        return (int) hexdec($data);
     }
 }

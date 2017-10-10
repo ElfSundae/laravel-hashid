@@ -103,6 +103,10 @@ class HashidServiceProvider extends ServiceProvider
     {
         return [
             'hashid' => HashidManager::class,
+            'hashid.driver.base64' => Base64Driver::class,
+            'hashid.driver.base64.integer' => Base64IntegerDriver::class,
+            'hashid.driver.hex' => HexDriver::class,
+            'hashid.driver.hex.integer' => HexIntegerDriver::class,
         ];
     }
 
@@ -115,8 +119,7 @@ class HashidServiceProvider extends ServiceProvider
     {
         return [
             Base62Driver::class => 'hashid.driver.base62',
-            Base64Driver::class => 'hashid.driver.base64',
-            HexDriver::class => 'hashid.driver.hex',
+            Base62IntegerDriver::class => 'hashid.driver.base62.integer',
         ];
     }
 

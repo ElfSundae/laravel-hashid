@@ -3,6 +3,7 @@
 namespace ElfSundae\Laravel\Hashid\Test;
 
 use ElfSundae\Laravel\Hashid\Base62Driver;
+use ElfSundae\Laravel\Hashid\Base62IntegerDriver;
 
 class Base62DriverTest extends DriverTestCase
 {
@@ -16,17 +17,16 @@ class Base62DriverTest extends DriverTestCase
     public function testEncoding()
     {
         $this->runForBytes();
-        $this->runForIntegers($this->makeDriver(['integer' => true]));
+        $this->runForIntegers(Base62IntegerDriver::class);
     }
 
     public function testEncodingWithCustomCharacters()
     {
-        $this->runForBytes($this->makeDriver([
+        $this->runForBytes([
             'characters' => str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
-        ]));
-        $this->runForIntegers($this->makeDriver([
+        ]);
+        $this->runForIntegers(Base62IntegerDriver::class, [
             'characters' => str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
-            'integer' => true,
-        ]));
+        ]);
     }
 }
