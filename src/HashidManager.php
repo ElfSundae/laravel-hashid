@@ -79,6 +79,10 @@ class HashidManager extends Manager
     /**
      * Create a new hashid connection instance for the driver.
      *
+     * We will check to see if a creator method exists for the given driver,
+     * and will call the Closure if so, which allows us to have a more generic
+     * resolver for the drivers themselves which applies to all connections.
+     *
      * @param  string  $name
      * @param  string  $driver
      * @param  array  $config
@@ -92,9 +96,6 @@ class HashidManager extends Manager
             throw new InvalidArgumentException('A driver must be specified.');
         }
 
-        // We will check to see if a creator method exists for the given driver,
-        // and will call the Closure if so, which allows us to have a more generic
-        // resolver for the drivers themselves which applies to all connections.
         if (isset($this->customCreators[$driver])) {
             return $this->customCreators[$driver]($config, $this->app, $name);
         }
