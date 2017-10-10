@@ -133,6 +133,7 @@ class HashidServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 Console\AlphabetGenerateCommand::class,
+                Console\OptimusGenerateCommand::class,
             ]);
         }
     }
