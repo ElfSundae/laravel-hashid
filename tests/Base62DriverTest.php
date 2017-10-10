@@ -8,7 +8,7 @@ use ElfSundae\Laravel\Hashid\Base62IntegerDriver;
 class Base62DriverTest extends DriverTestCase
 {
     protected $driver = Base62Driver::class;
-    protected $intDriver = Base62IntegerDriver::class;
+    protected $integerDriver = Base62IntegerDriver::class;
 
     public function testInstantiation()
     {
@@ -17,10 +17,14 @@ class Base62DriverTest extends DriverTestCase
 
     public function testEncoding()
     {
+        $this->assertEncodedData('Hashid', 'Mb6pKATc');
         $this->runForBytes();
         $this->assertUniformEncoding(random_bytes(128));
-        $this->runForIntegers($this->intDriver);
-        $this->assertUniformEncoding(random_int(0, PHP_INT_MAX), $this->intDriver);
+
+        $this->assertEncodedData(987654321, '14q60P', $this->integerDriver);
+        $this->assertEncodedData('987654321', '14q60P', $this->integerDriver);
+        $this->runForIntegers($this->integerDriver);
+        $this->assertUniformEncoding(random_int(0, PHP_INT_MAX), $this->integerDriver);
     }
 
     public function testEncodingWithCustomCharacters()
@@ -30,7 +34,7 @@ class Base62DriverTest extends DriverTestCase
         ];
         $this->runForBytes($config);
         $this->assertUniformEncoding(random_bytes(128), $config);
-        $this->runForIntegers($this->intDriver, $config);
-        $this->assertUniformEncoding(random_int(0, PHP_INT_MAX), $this->intDriver, $config);
+        $this->runForIntegers($this->integerDriver, $config);
+        $this->assertUniformEncoding(random_int(0, PHP_INT_MAX), $this->integerDriver, $config);
     }
 }

@@ -39,15 +39,13 @@ class OptimusDriverTest extends DriverTestCase
 
     public function testEncoding()
     {
+        $this->assertEncodedData(20, 1535832388, ['prime' => 1580030173, 'inverse' => 59260789, 'random' => 0]);
         $this->runForIntegersWith(0, $this->maxInteger, $this->getConfig());
         $this->assertUniformEncoding(random_int(0, $this->maxInteger), $this->getConfig());
     }
 
-    protected function getConfig(array $config = [])
+    protected function getConfig($prime = null)
     {
-        return array_merge(
-            array_combine(['prime', 'inverse', 'random'], Energon::generate()),
-            $config
-        );
+        return array_combine(['prime', 'inverse', 'random'], Energon::generate($prime));
     }
 }

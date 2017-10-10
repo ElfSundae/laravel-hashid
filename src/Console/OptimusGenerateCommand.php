@@ -59,7 +59,11 @@ class OptimusGenerateCommand extends Command
      */
     protected function generateOptimusNumbers($times = 1, $prime = null)
     {
-        $prime = (int) $prime ? $times = 1 : $prime = null;
+        if ($prime = (int) $prime) {
+            $times = 1;
+        } else {
+            $prime = null;
+        }
 
         $result = [];
 
