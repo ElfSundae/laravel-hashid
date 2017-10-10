@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => 'base62',
+    'default' => 'hashids.integer',
 
     /*
     |--------------------------------------------------------------------------
@@ -28,14 +28,42 @@ return [
 
     'connections' => [
 
+        'hashids' => [
+            'driver' => 'hashids',
+            'salt' => env('HASHIDS_SALT', ''),
+            'min_length' => env('HASHIDS_MIN_LENGTH', 0),
+            'alphabet' => env('HASHIDS_ALPHABET', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'),
+        ],
+
+        'hashids.integer' => [
+            'driver' => 'hashids.integer',
+            'salt' => env('HASHIDS_INTEGER_SALT', ''),
+            'min_length' => env('HASHIDS_INTEGER_MIN_LENGTH', 0),
+            'alphabet' => env('HASHIDS_INTEGER_ALPHABET', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'),
+        ],
+
+        'hashids.hex' => [
+            'driver' => 'hashids.hex',
+            'salt' => env('HASHIDS_HEX_SALT', ''),
+            'min_length' => env('HASHIDS_HEX_MIN_LENGTH', 0),
+            'alphabet' => env('HASHIDS_HEX_ALPHABET', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'),
+        ],
+
+        'optimus' => [
+            'driver' => 'optimus',
+            'prime' => env('OPTIMUS_PRIME'),
+            'inverse' => env('OPTIMUS_INVERSE'),
+            'random' => env('OPTIMUS_RANDOM', 0),
+        ],
+
         'base62' => [
             'driver' => 'base62',
-            'characters' => env('HASHID_BASE62_CHARACTERS', '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'),
+            'characters' => env('BASE62_CHARACTERS', '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'),
         ],
 
         'base62.integer' => [
             'driver' => 'base62.integer',
-            'characters' => env('HASHID_BASE62_CHARACTERS', '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'),
+            'characters' => env('BASE62_INTEGER_CHARACTERS', '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'),
         ],
 
         'base64' => [
@@ -46,40 +74,12 @@ return [
             'driver' => 'base64.integer',
         ],
 
-        'hashids' => [
-            'driver' => 'hashids',
-            'salt' => env('HASHID_HASHIDS_SALT', ''),
-            'min_length' => env('HASHID_HASHIDS_MIN_LENGTH', 0),
-            'alphabet' => env('HASHID_HASHIDS_ALPHABET', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'),
-        ],
-
-        'hashids.hex' => [
-            'driver' => 'hashids.hex',
-            'salt' => env('HASHID_HASHIDS_SALT', ''),
-            'min_length' => env('HASHID_HASHIDS_MIN_LENGTH', 0),
-            'alphabet' => env('HASHID_HASHIDS_ALPHABET', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'),
-        ],
-
-        'hashids.integer' => [
-            'driver' => 'hashids.integer',
-            'salt' => env('HASHID_HASHIDS_SALT', ''),
-            'min_length' => env('HASHID_HASHIDS_MIN_LENGTH', 0),
-            'alphabet' => env('HASHID_HASHIDS_ALPHABET', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'),
-        ],
-
         'hex' => [
             'driver' => 'hex',
         ],
 
         'hex.integer' => [
             'driver' => 'hex.integer',
-        ],
-
-        'optimus' => [
-            'driver' => 'optimus',
-            'prime' => env('HASHID_OPTIMUS_PRIME'),
-            'inverse' => env('HASHID_OPTIMUS_INVERSE'),
-            'random' => env('HASHID_OPTIMUS_RANDOM', 0),
         ],
 
     ],
