@@ -12,7 +12,8 @@ class Base62DriverTest extends DriverTestCase
 
     public function testInstantiation()
     {
-        $this->assertInstanceOf(Base62Driver::class, $this->makeDriver());
+        $this->assertInstanceOf($this->driver, $this->makeDriver());
+        $this->assertInstanceOf($this->integerDriver, $this->makeDriver($this->integerDriver));
     }
 
     public function testEncoding()

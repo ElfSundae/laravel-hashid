@@ -9,11 +9,12 @@ use ElfSundae\Laravel\Hashid\OptimusDriver;
 class OptimusDriverTest extends DriverTestCase
 {
     protected $driver = OptimusDriver::class;
+
     protected $maxInteger = Optimus::MAX_INT;
 
     public function testInstantiation()
     {
-        $this->assertInstanceOf(OptimusDriver::class, $this->makeDriver($this->getConfig()));
+        $this->assertInstanceOf($this->driver, $this->makeDriver($this->getConfig()));
     }
 
     public function testExceptionCreatingWithEmptyConfig()

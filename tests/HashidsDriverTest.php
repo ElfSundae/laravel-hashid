@@ -10,6 +10,6 @@ class HashidsDriverTest extends DriverTestCase
 
     public function testInstantiation()
     {
-        $this->assertInstanceOf(HashidsDriver::class, $this->makeDriver());
+        $this->assertInstanceOf($this->driver, $this->makeDriver());
     }
 }
