@@ -3,6 +3,7 @@
 namespace ElfSundae\Laravel\Hashid\Test;
 
 use Jenssegers\Optimus\Energon;
+use Jenssegers\Optimus\Optimus;
 use ElfSundae\Laravel\Hashid\OptimusDriver;
 
 class OptimusDriverTest extends DriverTestCase
@@ -37,7 +38,7 @@ class OptimusDriverTest extends DriverTestCase
 
     public function testEncoding()
     {
-        $this->runForIntegersWith(0, 300, $this->getConfig());
+        $this->runForIntegersWith(0, Optimus::MAX_INT, $this->getConfig());
     }
 
     protected function getConfig(array $config = [])
