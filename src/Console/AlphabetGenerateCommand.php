@@ -30,7 +30,7 @@ class AlphabetGenerateCommand extends Command
     {
         $this->comment(
             $this->generateRandomAlphabet(
-                (string) $this->option('characters'),
+                $this->option('characters'),
                 $this->getTimes()
             )
         );
