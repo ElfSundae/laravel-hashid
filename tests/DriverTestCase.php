@@ -72,8 +72,13 @@ abstract class DriverTestCase extends TestCase
 
     protected function runForIntegers($driver = null, array $config = [])
     {
-        $this->assertReversible(random_int(0, PHP_INT_MAX), $driver, $config);
-        $this->assertReversible(0, $driver, $config);
-        $this->assertReversible(PHP_INT_MAX, $driver, $config);
+        $this->runForIntegersWith(0, PHP_INT_MAX, $driver, $config);
+    }
+
+    protected function runForIntegersWith($min = 0, $max = PHP_INT_MAX, $driver = null, array $config = [])
+    {
+        $this->assertReversible(random_int($min, $max), $driver, $config);
+        $this->assertReversible($min, $driver, $config);
+        $this->assertReversible($max, $driver, $config);
     }
 }

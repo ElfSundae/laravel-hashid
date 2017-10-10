@@ -54,6 +54,13 @@ return [
             'driver' => 'hex.integer',
         ],
 
+        'optimus' => [
+            'driver' => 'optimus',
+            'prime' => env('HASHID_OPTIMUS_PRIME'),
+            'inverse' => env('HASHID_OPTIMUS_INVERSE'),
+            'random' => env('HASHID_OPTIMUS_RANDOM', 0),
+        ],
+
     ],
 
 ];
