@@ -23,7 +23,6 @@ class Base64DriverTest extends DriverTestCase
         $this->assertUniformEncoding(random_bytes(128));
 
         $this->assertEncodedData(1234567, 'MTIzNDU2Nw', $this->integerDriver);
-        $this->assertEncodedData('1234567', 'MTIzNDU2Nw', $this->integerDriver);
         $this->runForIntegers($this->integerDriver);
         $this->assertUniformEncoding(random_int(0, PHP_INT_MAX), $this->integerDriver);
     }

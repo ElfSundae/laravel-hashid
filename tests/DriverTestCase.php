@@ -34,6 +34,8 @@ abstract class DriverTestCase extends TestCase
         $driver = $this->makeDriver($driver, $config);
         $encoded = $driver->encode($data);
         $this->assertSame($encodedData, $encoded);
+        $decoded = $driver->decode($encodedData);
+        $this->assertSame($data, $decoded);
     }
 
     protected function assertReversible($data, $driver = null, array $config = [])
