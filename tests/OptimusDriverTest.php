@@ -9,6 +9,7 @@ use ElfSundae\Laravel\Hashid\OptimusDriver;
 class OptimusDriverTest extends DriverTestCase
 {
     protected $driver = OptimusDriver::class;
+    protected $maxInteger = Optimus::MAX_INT;
 
     public function testInstantiation()
     {
@@ -38,7 +39,8 @@ class OptimusDriverTest extends DriverTestCase
 
     public function testEncoding()
     {
-        $this->runForIntegersWith(0, Optimus::MAX_INT, $this->getConfig());
+        $this->runForIntegersWith(0, $this->maxInteger, $this->getConfig());
+        $this->assertUniformEncoding(random_int(0, $this->maxInteger), $this->getConfig());
     }
 
     protected function getConfig(array $config = [])

@@ -7,9 +7,14 @@ use ElfSundae\Laravel\Hashid\Base64IntegerDriver;
 
 class Base64DriverTest extends DriverTestCase
 {
+    protected $driver = Base64Driver::class;
+    protected $intDriver = Base64IntegerDriver::class;
+
     public function testEncoding()
     {
-        $this->runForBytes(Base64Driver::class);
-        $this->runForIntegers(Base64IntegerDriver::class);
+        $this->runForBytes();
+        $this->assertUniformEncoding(random_bytes(128));
+        $this->runForIntegers($this->intDriver);
+        $this->assertUniformEncoding(random_int(0, PHP_INT_MAX), $this->intDriver);
     }
 }

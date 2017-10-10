@@ -8,6 +8,7 @@ use ElfSundae\Laravel\Hashid\Base62IntegerDriver;
 class Base62DriverTest extends DriverTestCase
 {
     protected $driver = Base62Driver::class;
+    protected $intDriver = Base62IntegerDriver::class;
 
     public function testInstantiation()
     {
@@ -17,16 +18,19 @@ class Base62DriverTest extends DriverTestCase
     public function testEncoding()
     {
         $this->runForBytes();
-        $this->runForIntegers(Base62IntegerDriver::class);
+        $this->assertUniformEncoding(random_bytes(128));
+        $this->runForIntegers($this->intDriver);
+        $this->assertUniformEncoding(random_int(0, PHP_INT_MAX), $this->intDriver);
     }
 
     public function testEncodingWithCustomCharacters()
     {
-        $this->runForBytes([
+        $config = [
             'characters' => str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
-        ]);
-        $this->runForIntegers(Base62IntegerDriver::class, [
-            'characters' => str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
-        ]);
+        ];
+        $this->runForBytes($config);
+        $this->assertUniformEncoding(random_bytes(128), $config);
+        $this->runForIntegers($this->intDriver, $config);
+        $this->assertUniformEncoding(random_int(0, PHP_INT_MAX), $this->intDriver, $config);
     }
 }
