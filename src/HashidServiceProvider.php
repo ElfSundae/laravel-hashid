@@ -119,6 +119,7 @@ class HashidServiceProvider extends ServiceProvider
         return [
             Base62Driver::class => 'hashid.driver.base62',
             Base62IntegerDriver::class => 'hashid.driver.base62.integer',
+            HashidsDriver::class => 'hashid.driver.hashids',
             OptimusDriver::class => 'hashid.driver.optimus',
         ];
     }
