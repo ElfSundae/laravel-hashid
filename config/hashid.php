@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => 'base64',
+    'default' => 'base62',
 
     /*
     |--------------------------------------------------------------------------
@@ -30,26 +30,28 @@ return [
 
         'base62' => [
             'driver' => 'base62',
-            'characters' => env('HASHID_BASE62_CHARACTERS', \Tuupola\Base62::GMP),
+            'characters' => env('HASHID_BASE62_CHARACTERS', '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
         ],
 
-        'base62-integer' => [
-            'driver' => 'base62',
-            'characters' => env('HASHID_BASE62_CHARACTERS', \Tuupola\Base62::GMP),
-            'integer' => true,
+        'base62.integer' => [
+            'driver' => 'base62.integer',
+            'characters' => env('HASHID_BASE62_CHARACTERS', '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
         ],
 
         'base64' => [
             'driver' => 'base64',
         ],
 
-        'base64-integer' => [
-            'driver' => 'base64',
-            'integer' => true,
+        'base64.integer' => [
+            'driver' => 'base64.integer',
         ],
 
         'hex' => [
             'driver' => 'hex',
+        ],
+
+        'hex.integer' => [
+            'driver' => 'hex.integer',
         ],
 
     ],
