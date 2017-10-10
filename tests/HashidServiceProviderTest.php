@@ -3,8 +3,8 @@
 namespace ElfSundae\Laravel\Hashid\Test;
 
 use Orchestra\Testbench\TestCase;
-use ElfSundae\Laravel\Hashid\HashidManager;
 use ElfSundae\Laravel\Hashid\HexDriver;
+use ElfSundae\Laravel\Hashid\HashidManager;
 use ElfSundae\Laravel\Hashid\Facades\Hashid;
 use ElfSundae\Laravel\Hashid\HashidServiceProvider;
 

@@ -22,7 +22,7 @@ abstract class DriverTestCase extends TestCase
     {
         $driver = $driver ?: $this->makeDriver();
 
-        for ($i=0; $i < $times; $i++) {
+        for ($i = 0; $i < $times; $i++) {
             $data = random_bytes(random_int(0, 128));
             $decoded = $driver->decode($driver->encode($data));
             $this->assertSame($data, $decoded);
@@ -33,7 +33,7 @@ abstract class DriverTestCase extends TestCase
     {
         $driver = $driver ?: $this->makeDriver();
 
-        for ($i=0; $i < $times; $i++) {
+        for ($i = 0; $i < $times; $i++) {
             $data = random_int(0, PHP_INT_MAX);
             $decoded = $driver->decode($driver->encode($data));
             $this->assertSame($data, $decoded);
