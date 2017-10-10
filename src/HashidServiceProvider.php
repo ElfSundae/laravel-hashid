@@ -4,7 +4,6 @@ namespace ElfSundae\Laravel\Hashid;
 
 use ReflectionClass;
 use Illuminate\Support\ServiceProvider;
-use Laravel\Lumen\Application as LumenApplication;
 
 class HashidServiceProvider extends ServiceProvider
 {
@@ -45,7 +44,7 @@ class HashidServiceProvider extends ServiceProvider
      */
     protected function setupAssets()
     {
-        if ($this->app instanceof LumenApplication) {
+        if (is_a($this->app, 'Laravel\Lumen\Application')) {
             $this->app->configure('hashid');
         }
 
