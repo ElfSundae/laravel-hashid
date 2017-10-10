@@ -31,7 +31,10 @@ class OptimusGenerateCommand extends Command
     {
         $this->table(
             ['prime', 'inverse', 'random'],
-            $this->generateOptimusNumbers($this->getTimes())
+            $this->generateOptimusNumbers(
+                $this->getTimes(),
+                $this->option('prime')
+            )
         );
     }
 
@@ -51,14 +54,17 @@ class OptimusGenerateCommand extends Command
      * Generate Optimus numbers.
      *
      * @param  int  $times
+     * @param  mixed  $prime
      * @return array
      */
-    protected function generateOptimusNumbers($times = 1)
+    protected function generateOptimusNumbers($times = 1, $prime = null)
     {
+        $prime = (int) $prime ? $times = 1 : $prime = null;
+
         $result = [];
 
         for ($i = 0; $i < $times; $i++) {
-            $result[] = Energon::generate();
+            $result[] = Energon::generate($prime);
         }
 
         return $result;
@@ -72,6 +78,7 @@ class OptimusGenerateCommand extends Command
     protected function getOptions()
     {
         return [
+            ['prime', 'p', InputOption::VALUE_OPTIONAL, 'Generate with the given prime'],
             ['times', 't', InputOption::VALUE_OPTIONAL, 'Times to generate', 1],
         ];
     }
