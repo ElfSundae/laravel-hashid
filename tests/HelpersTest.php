@@ -52,11 +52,7 @@ class HelpersTest extends TestCase
 
     public function test_config_path()
     {
-        if (method_exists($this->app, 'configPath')) {
-            $this->assertSame($this->app->configPath('foo/bar'), config_path('foo/bar'));
-        } else {
-            $this->assertSame($this->app->basePath('config/foo/bar'), config_path('foo/bar'));
-        }
+        $this->assertSame($this->app->basePath('config/foo/bar'), config_path('foo/bar'));
     }
 
     protected function getPackageProviders($app)
