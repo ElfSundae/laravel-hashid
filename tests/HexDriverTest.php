@@ -15,6 +15,7 @@ class HexDriverTest extends DriverTestCase
 
     public function testEncoding()
     {
+        $this->runForBytes();
         $this->runForIntegers($this->makeDriver(['integer' => true]));
     }
 }

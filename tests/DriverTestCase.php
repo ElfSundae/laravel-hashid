@@ -49,13 +49,13 @@ abstract class DriverTestCase extends TestCase
 
     protected function runForLeadingZeroBytes($driver = null)
     {
-        $data = hex2bin("03486eea2de87439");
+        $data = hex2bin('03486eea2de87439');
         $this->assertReversible($data, $driver);
     }
 
     protected function runForLeadingNullTerminatorBytes($driver = null)
     {
-        $data = hex2bin("00616263313233");
+        $data = hex2bin('00616263313233');
         $this->assertReversible($data, $driver);
     }
 
