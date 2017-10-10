@@ -19,7 +19,8 @@ class Base62DriverTest extends DriverTestCase
     public function testEncoding()
     {
         $this->assertEncodedData('Hashid', 'Mb6pKATc');
-        $this->runForBytes();
+        $this->runForRandomBytes();
+        $this->runForLeadingZeroBytes();
         $this->assertUniformEncoding(random_bytes(128));
 
         $this->assertEncodedData(987654321, '14q60P', $this->integerDriver);
@@ -32,7 +33,8 @@ class Base62DriverTest extends DriverTestCase
         $config = [
             'characters' => str_shuffle('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'),
         ];
-        $this->runForBytes($config);
+        $this->runForRandomBytes($config);
+        $this->runForLeadingZeroBytes($config);
         $this->assertUniformEncoding(random_bytes(128), $config);
         $this->runForIntegers($this->integerDriver, $config);
         $this->assertUniformEncoding(random_int(0, PHP_INT_MAX), $this->integerDriver, $config);

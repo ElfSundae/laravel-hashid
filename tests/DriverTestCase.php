@@ -58,7 +58,7 @@ abstract class DriverTestCase extends TestCase
     {
         $this->runForRandomBytes($driver, $config);
         $this->runForLeadingZeroBytes($driver, $config);
-        // $this->runForLeadingNullTerminatorBytes($driver, $config);
+        $this->runForLeadingNullTerminatorBytes($driver, $config);
     }
 
     protected function runForRandomBytes($driver = null, array $config = [])
