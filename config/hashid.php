@@ -53,6 +53,13 @@ return [
             'alphabet' => env('HASHID_HASHIDS_ALPHABET', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'),
         ],
 
+        'hashids.hex' => [
+            'driver' => 'hashids.hex',
+            'salt' => env('HASHID_HASHIDS_SALT', ''),
+            'min_length' => env('HASHID_HASHIDS_MIN_LENGTH', 0),
+            'alphabet' => env('HASHID_HASHIDS_ALPHABET', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'),
+        ],
+
         'hex' => [
             'driver' => 'hex',
         ],
