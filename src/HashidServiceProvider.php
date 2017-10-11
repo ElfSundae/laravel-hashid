@@ -76,11 +76,8 @@ class HashidServiceProvider extends ServiceProvider
     {
         $reflector = new ReflectionClass($class);
 
-        if (is_null($reflector->getConstructor())) {
-            return new $class;
-        }
-
-        return $reflector->newInstanceArgs($args);
+        return is_null($reflector->getConstructor())
+            ? new $class : $reflector->newInstanceArgs($args);
     }
 
     /**
