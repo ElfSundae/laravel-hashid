@@ -22,7 +22,18 @@ class HashidsDriverTest extends DriverTestCase
     public function testEncoding()
     {
         $this->assertEncodedData([1, 2, 3], 'o2fXhV');
+        $randomIntegers = array_map(function () {
+            return random_int(0, PHP_INT_MAX);
+        }, array_fill(0, 10, null));
+        $this->assertReversible($randomIntegers);
+        $this->assertUniformEncoding($randomIntegers);
+
         $this->assertEncodedData('507f1f77bcf86cd799439011', 'y42LW46J9luq3Xq9XMly', $this->hexDriver);
+        $this->assertReversible(bin2hex(random_bytes(128)), $this->hexDriver);
+        $this->assertUniformEncoding(bin2hex(random_bytes(128)), $this->hexDriver);
+
         $this->assertEncodedData(1, 'jR', $this->integerDriver);
+        $this->runForIntegers($this->integerDriver);
+        $this->assertUniformEncoding(random_int(0, PHP_INT_MAX), $this->integerDriver);
     }
 }

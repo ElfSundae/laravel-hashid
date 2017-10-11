@@ -63,7 +63,7 @@ abstract class DriverTestCase extends TestCase
 
     protected function runForRandomBytes($driver = null, array $config = [])
     {
-        $data = random_bytes(random_int(1, 128));
+        $data = random_bytes(random_int(64, 256));
         $this->assertReversible($data, $driver, $config);
     }
 
