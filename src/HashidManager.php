@@ -65,7 +65,7 @@ class HashidManager extends Manager
      */
     protected function createDriver($name)
     {
-        $config = $this->app['config']->get("hashid.connections.{$name}", []);
+        $config = $this->configuration($name);
 
         if (isset($this->customCreators[$name])) {
             return $this->customCreators[$name]($config, $this->app, $name);
@@ -74,6 +74,17 @@ class HashidManager extends Manager
         $driver = Arr::pull($config, 'driver');
 
         return $this->createConnectionForDriver($name, $driver, $config);
+    }
+
+    /**
+     * Get the configuration for a connection.
+     *
+     * @param  string  $name
+     * @return array
+     */
+    protected function configuration($name)
+    {
+        return Arr::get($this->app['config']['hashid.connections'], $name, []);
     }
 
     /**
