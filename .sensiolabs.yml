@@ -1,3 +1,0 @@
-rules:
-    php.use_global_variable_or_function:
-        enabled: false
