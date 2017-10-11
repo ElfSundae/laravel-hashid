@@ -4,6 +4,7 @@ namespace ElfSundae\Laravel\Hashid\Test;
 
 use ElfSundae\Laravel\Hashid\HashidsDriver;
 use ElfSundae\Laravel\Hashid\HashidsHexDriver;
+use ElfSundae\Laravel\Hashid\HashidsStringDriver;
 use ElfSundae\Laravel\Hashid\HashidsIntegerDriver;
 
 class HashidsDriverTest extends DriverTestCase
@@ -11,12 +12,14 @@ class HashidsDriverTest extends DriverTestCase
     protected $driver = HashidsDriver::class;
     protected $hexDriver = HashidsHexDriver::class;
     protected $integerDriver = HashidsIntegerDriver::class;
+    protected $stringDriver = HashidsStringDriver::class;
 
     public function testInstantiation()
     {
         $this->assertInstanceOf($this->driver, $this->makeDriver());
         $this->assertInstanceOf($this->hexDriver, $this->makeDriver($this->hexDriver));
         $this->assertInstanceOf($this->integerDriver, $this->makeDriver($this->integerDriver));
+        $this->assertInstanceOf($this->stringDriver, $this->makeDriver($this->stringDriver));
     }
 
     public function testEncoding()
@@ -35,5 +38,9 @@ class HashidsDriverTest extends DriverTestCase
         $this->assertEncodedData(1, 'jR', $this->integerDriver);
         $this->runForIntegers($this->integerDriver);
         $this->assertUniformEncoding(random_int(0, PHP_INT_MAX), $this->integerDriver);
+
+        $this->assertEncodedData('Hashid', 'mWxDrOkZ49', $this->stringDriver);
+        $this->runForBytes($this->stringDriver);
+        $this->assertUniformEncoding(random_bytes(128), $this->stringDriver);
     }
 }

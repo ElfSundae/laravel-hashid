@@ -106,6 +106,7 @@ class HashidServiceProvider extends ServiceProvider
             HashidsDriver::class => 'hashid.driver.hashids',
             HashidsHexDriver::class => 'hashid.driver.hashids.hex',
             HashidsIntegerDriver::class => 'hashid.driver.hashids.integer',
+            HashidsStringDriver::class => 'hashid.driver.hashids.string',
             OptimusDriver::class => 'hashid.driver.optimus',
         ];
     }

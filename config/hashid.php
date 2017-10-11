@@ -49,6 +49,13 @@ return [
             'alphabet' => env('HASHIDS_HEX_ALPHABET', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'),
         ],
 
+        'hashids_string' => [
+            'driver' => 'hashids.string',
+            'salt' => env('HASHIDS_STRING_SALT', ''),
+            'min_length' => env('HASHIDS_STRING_MIN_LENGTH', 0),
+            'alphabet' => env('HASHIDS_STRING_ALPHABET', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'),
+        ],
+
         'optimus' => [
             'driver' => 'optimus',
             'prime' => env('OPTIMUS_PRIME'),
