@@ -40,17 +40,3 @@ if (! function_exists('hashid_decode')) {
         return hashid($name)->decode($data);
     }
 }
-
-if (! function_exists('config_path')) {
-    /**
-     * Get the configuration path.
-     * For Lumen compatible.
-     *
-     * @param  string  $path
-     * @return string
-     */
-    function config_path($path = '')
-    {
-        return app()->basePath().DIRECTORY_SEPARATOR.'config'.($path ? DIRECTORY_SEPARATOR.$path : $path);
-    }
-}

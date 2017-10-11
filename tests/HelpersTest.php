@@ -50,14 +50,6 @@ class HelpersTest extends TestCase
         $this->assertSame('OK', hashid_decode('text', 'foo'));
     }
 
-    public function test_config_path()
-    {
-        $this->assertSame(
-            $this->app->basePath().'/config/foo/bar',
-            config_path('foo/bar')
-        );
-    }
-
     protected function getPackageProviders($app)
     {
         return [HashidServiceProvider::class];

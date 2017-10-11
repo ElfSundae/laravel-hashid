@@ -34,7 +34,7 @@ class HashidServiceProvider extends ServiceProvider
         $this->mergeConfigFrom($config = __DIR__.'/../config/hashid.php', 'hashid');
 
         if ($this->app->runningInConsole()) {
-            $this->publishes([$config => config_path('hashid.php')], 'hashid');
+            $this->publishes([$config => base_path('config/hashid.php')], 'hashid');
         }
     }
 
