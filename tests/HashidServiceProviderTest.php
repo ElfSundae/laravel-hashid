@@ -13,12 +13,16 @@ class HashidServiceProviderTest extends TestCase
     public function testInstantiation()
     {
         $this->assertInstanceOf(HashidServiceProvider::class, new HashidServiceProvider($this->app));
+    }
 
-        $this->app->register($service = HashidServiceProvider::class);
-        $this->app->isDeferredService($service);
+    public function testBindings()
+    {
+        $this->app->register(HashidServiceProvider::class);
 
-        $this->assertSame($this->app['hashid'], $this->app[HashidManager::class]);
-        $this->assertSame($this->app['hashid'], Hashid::getFacadeRoot());
+        $manager = $this->app['hashid'];
+        $this->assertSame($manager, $this->app[HashidManager::class]);
+        $this->assertSame($manager, Hashid::getFacadeRoot());
+        $this->assertSame($manager->connection(), $this->app['hashid.connection']);
     }
 
     public function testLumenInstantiation()
@@ -26,12 +30,13 @@ class HashidServiceProviderTest extends TestCase
         $app = m::mock('Laravel\Lumen\Application');
         $app->shouldReceive('configure')
             ->with('hashid')
-            ->andThrow(new \Exception('exception message', 100));
-
-        $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('exception message');
-        $this->expectExceptionCode(100);
+            ->andThrow(new FooException);
+        $this->expectException(FooException::class);
         $service = new HashidServiceProvider($app);
         $service->register();
     }
+}
+
+class FooException extends \Exception
+{
 }
