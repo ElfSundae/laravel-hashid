@@ -2,6 +2,7 @@
 
 namespace ElfSundae\Laravel\Hashid\Test;
 
+use Mockery as m;
 use Orchestra\Testbench\TestCase;
 use ElfSundae\Laravel\Hashid\HashidManager;
 use ElfSundae\Laravel\Hashid\Facades\Hashid;
@@ -9,18 +10,28 @@ use ElfSundae\Laravel\Hashid\HashidServiceProvider;
 
 class HashidServiceProviderTest extends TestCase
 {
-    public function testBindings()
+    public function testInstantiation()
     {
-        $this->assertSame($this->app['hashid'], $this->app[HashidManager::class]);
-    }
+        $this->assertInstanceOf(HashidServiceProvider::class, new HashidServiceProvider($this->app));
 
-    public function testFacades()
-    {
+        $this->app->register($service = HashidServiceProvider::class);
+        $this->app->isDeferredService($service);
+
+        $this->assertSame($this->app['hashid'], $this->app[HashidManager::class]);
         $this->assertSame($this->app['hashid'], Hashid::getFacadeRoot());
     }
 
-    protected function getPackageProviders($app)
+    public function testLumenInstantiation()
     {
-        return [HashidServiceProvider::class];
+        $app = m::mock('Laravel\Lumen\Application');
+        $app->shouldReceive('configure')
+            ->with('hashid')
+            ->andThrow(new \Exception('exception message', 100));
+
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('exception message');
+        $this->expectExceptionCode(100);
+        $service = new HashidServiceProvider($app);
+        $service->register();
     }
 }
