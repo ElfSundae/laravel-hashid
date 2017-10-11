@@ -12,7 +12,7 @@
 ## Installation
 
 ```sh
-composer require elfsundae/laravel-hashid
+$ composer require elfsundae/laravel-hashid
 ```
 
 ## Usage
