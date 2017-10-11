@@ -63,6 +63,10 @@ class HashidServiceProvider extends ServiceProvider
         foreach ($this->getClassAliases() as $abstract => $alias) {
             $this->app->alias($abstract, $alias);
         }
+
+        $this->app->bind('hashid.connection', function ($app) {
+            return $app['hashid']->connection();
+        });
     }
 
     /**
