@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => 'hashids.integer',
+    'default' => 'hashids_integer',
 
     /*
     |--------------------------------------------------------------------------
@@ -35,14 +35,14 @@ return [
             'alphabet' => env('HASHIDS_ALPHABET', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'),
         ],
 
-        'hashids.integer' => [
+        'hashids_integer' => [
             'driver' => 'hashids.integer',
             'salt' => env('HASHIDS_INTEGER_SALT', ''),
             'min_length' => env('HASHIDS_INTEGER_MIN_LENGTH', 0),
             'alphabet' => env('HASHIDS_INTEGER_ALPHABET', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'),
         ],
 
-        'hashids.hex' => [
+        'hashids_hex' => [
             'driver' => 'hashids.hex',
             'salt' => env('HASHIDS_HEX_SALT', ''),
             'min_length' => env('HASHIDS_HEX_MIN_LENGTH', 0),
@@ -61,7 +61,7 @@ return [
             'characters' => env('BASE62_CHARACTERS', '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'),
         ],
 
-        'base62.integer' => [
+        'base62_integer' => [
             'driver' => 'base62.integer',
             'characters' => env('BASE62_INTEGER_CHARACTERS', '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'),
         ],
@@ -70,7 +70,7 @@ return [
             'driver' => 'base64',
         ],
 
-        'base64.integer' => [
+        'base64_integer' => [
             'driver' => 'base64.integer',
         ],
 
@@ -78,7 +78,7 @@ return [
             'driver' => 'hex',
         ],
 
-        'hex.integer' => [
+        'hex_integer' => [
             'driver' => 'hex.integer',
         ],
 
