@@ -8,13 +8,6 @@ use Illuminate\Support\ServiceProvider;
 class HashidServiceProvider extends ServiceProvider
 {
     /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = true;
-
-    /**
      * Register the service provider.
      *
      * @return void
@@ -130,18 +123,5 @@ class HashidServiceProvider extends ServiceProvider
                 Console\OptimusGenerateCommand::class,
             ]);
         }
-    }
-
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return string[]
-     */
-    public function provides()
-    {
-        return array_merge(
-            array_keys($bindings = $this->getSingletonBindings()),
-            array_values($bindings)
-        );
     }
 }
