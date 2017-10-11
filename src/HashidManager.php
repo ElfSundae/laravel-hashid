@@ -71,7 +71,9 @@ class HashidManager extends Manager
             return $this->customCreators[$name]($config, $this->app, $name);
         }
 
-        $driver = Arr::pull($config, 'driver');
+        if (is_null($driver = Arr::pull($config, 'driver'))) {
+            throw new InvalidArgumentException('A driver must be specified.');
+        }
 
         return $this->createConnectionForDriver($name, $driver, $config);
     }
@@ -103,10 +105,6 @@ class HashidManager extends Manager
      */
     protected function createConnectionForDriver($name, $driver, array $config = [])
     {
-        if (is_null($driver)) {
-            throw new InvalidArgumentException('A driver must be specified.');
-        }
-
         if (isset($this->customCreators[$driver])) {
             return $this->customCreators[$driver]($config, $this->app, $name);
         }
