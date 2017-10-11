@@ -68,14 +68,25 @@ class HashidManager extends Manager
         $config = $this->configuration($name);
 
         if (isset($this->customCreators[$name])) {
-            return $this->customCreators[$name]($config, $this->app, $name);
+            return $this->callCustomCreator($name, compact('config'));
         }
 
         if (is_null($driver = Arr::pull($config, 'driver'))) {
             throw new InvalidArgumentException('A driver must be specified.');
         }
 
-        return $this->createConnectionForDriver($name, $driver, $config);
+        return $this->createConnectionForDriver($driver, $config);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function callCustomCreator($driver)
+    {
+        return $this->app->call(
+            $this->customCreators[$driver],
+            func_num_args() > 1 ? func_get_arg(1) : []
+        );
     }
 
     /**
@@ -96,24 +107,20 @@ class HashidManager extends Manager
      * and will call the Closure if so, which allows us to have a more generic
      * resolver for the drivers themselves which applies to all connections.
      *
-     * @param  string  $name
      * @param  string  $driver
      * @param  array  $config
      * @return mixed
      *
      * @throws \InvalidArgumentException
      */
-    protected function createConnectionForDriver($name, $driver, array $config = [])
+    protected function createConnectionForDriver($driver, array $config = [])
     {
         if (isset($this->customCreators[$driver])) {
-            return $this->customCreators[$driver]($config, $this->app, $name);
+            return $this->callCustomCreator($driver, compact('config'));
         }
 
         if ($this->app->bound($key = "hashid.driver.{$driver}")) {
-            return $this->resolveFromContainer($key, [
-                'app' => $this->app,
-                'config' => $config,
-            ]);
+            return $this->resolveFromContainer($key, compact('config'));
         }
 
         throw new InvalidArgumentException("Unsupported driver [$driver]");

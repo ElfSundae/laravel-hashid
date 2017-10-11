@@ -52,10 +52,8 @@ class HashidManagerTest extends TestCase
                 ],
             ],
         ]);
-        $manager->extend('foo', function ($config, $app, $name) {
+        $manager->extend('foo', function ($config) {
             $this->assertEquals(['key' => 'value'], $config);
-            $this->assertSame($this->app, $app);
-            $this->assertSame('foo', $name);
 
             return 'FooConnection';
         });
@@ -72,10 +70,8 @@ class HashidManagerTest extends TestCase
                 ],
             ],
         ]);
-        $manager->extend('foo-driver', function ($config, $app, $name) {
+        $manager->extend('foo-driver', function ($config) {
             $this->assertEquals(['key' => 'value'], $config);
-            $this->assertSame($this->app, $app);
-            $this->assertSame('foo', $name);
 
             return 'FooConnection';
         });
@@ -96,7 +92,6 @@ class HashidManagerTest extends TestCase
         $connection = $manager->connection('foo');
         $this->assertInstanceOf(TestDriver::class, $connection);
         $this->assertEquals(['key' => 'value'], $connection->config);
-        $this->assertSame($this->app, $connection->app);
     }
 
     public function testCreateConnectionWithSharedDriverBinding()
@@ -109,14 +104,10 @@ class HashidManagerTest extends TestCase
                 ],
             ],
         ]);
-        $this->app->singleton('hashid.driver.foo-driver', function ($app) {
-            return new TestDriver($app, ['bar']);
-        });
+        $driver = new TestDriver;
+        $this->app->instance('hashid.driver.foo-driver', $driver);
         $connection = $manager->connection('foo');
-        $this->assertSame($connection, $this->app['hashid.driver.foo-driver']);
-        $this->assertInstanceOf(TestDriver::class, $connection);
-        $this->assertEquals(['bar'], $connection->config);
-        $this->assertSame($this->app, $connection->app);
+        $this->assertSame($driver, $connection);
     }
 
     public function testGetConnections()
@@ -146,12 +137,10 @@ class HashidManagerTest extends TestCase
 
 class TestDriver
 {
-    public $app;
     public $config;
 
-    public function __construct($app = null, $config = null)
+    public function __construct($config = null)
     {
-        $this->app = $app;
         $this->config = $config;
     }
 }
