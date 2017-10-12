@@ -114,7 +114,7 @@ class HashidManagerTest extends TestCase
             ],
         ]);
 
-        $this->app->alias('foo-driver', FooDriver::class);
+        $this->app->bind('foo-driver', FooDriver::class);
 
         $fooConnection = $manager->connection('foo');
         $this->assertInstanceOf(FooDriver::class, $fooConnection);
@@ -136,7 +136,7 @@ class HashidManagerTest extends TestCase
             ],
         ]);
 
-        $this->app->alias('hashid.driver.foo-driver', FooDriver::class);
+        $this->app->bind('hashid.driver.foo-driver', FooDriver::class);
 
         $fooConnection = $manager->connection('foo');
         $this->assertInstanceOf(FooDriver::class, $fooConnection);
@@ -176,7 +176,7 @@ class HashidManagerTest extends TestCase
             ],
         ]);
 
-        $this->app->alias('bar-driver', BarDriver::class);
+        $this->app->bind('bar-driver', BarDriver::class);
 
         $barConnection = $manager->connection('bar');
         $this->assertInstanceOf(BarDriver::class, $barConnection);

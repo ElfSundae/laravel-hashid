@@ -53,8 +53,8 @@ class HashidServiceProvider extends ServiceProvider
             $this->app->alias($abstract, $concrete);
         }
 
-        foreach ($this->getClassAliases() as $abstract => $alias) {
-            $this->app->alias($abstract, $alias);
+        foreach ($this->getAliasesBindings() as $abstract => $concrete) {
+            $this->app->bind($abstract, $concrete);
         }
 
         $this->app->bind('hashid.connection', function ($app) {
@@ -98,7 +98,7 @@ class HashidServiceProvider extends ServiceProvider
      *
      * @return array
      */
-    protected function getClassAliases()
+    protected function getAliasesBindings()
     {
         return [
             'hashid.driver.base62' => Base62Driver::class,
