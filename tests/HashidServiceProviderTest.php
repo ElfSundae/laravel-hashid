@@ -2,7 +2,6 @@
 
 namespace ElfSundae\Laravel\Hashid\Test;
 
-use Mockery as m;
 use Orchestra\Testbench\TestCase;
 use ElfSundae\Laravel\Hashid\HashidManager;
 use ElfSundae\Laravel\Hashid\Facades\Hashid;
@@ -24,19 +23,4 @@ class HashidServiceProviderTest extends TestCase
         $this->assertSame($manager, Hashid::getFacadeRoot());
         $this->assertSame($manager->connection(), $this->app['hashid.connection']);
     }
-
-    public function testLumenInstantiation()
-    {
-        $app = m::mock('Laravel\Lumen\Application');
-        $app->shouldReceive('configure')
-            ->with('hashid')
-            ->andThrow(new FooException);
-        $this->expectException(FooException::class);
-        $service = new HashidServiceProvider($app);
-        $service->register();
-    }
-}
-
-class FooException extends \Exception
-{
 }
