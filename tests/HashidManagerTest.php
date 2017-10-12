@@ -23,29 +23,11 @@ class HashidManagerTest extends TestCase
         $this->assertSame('foo', $this->app['config']['hashid.default']);
     }
 
-    public function testNoneDriver()
-    {
-        $manager = $this->getManager([
-            'connections' => [
-                'foo' => [],
-            ],
-        ]);
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('A driver must be specified.');
-        $manager->connection('foo');
-    }
-
     public function testUnsupportedDriver()
     {
-        $manager = $this->getManager([
-            'connections' => [
-                'foo' => [
-                    'driver' => 'foo-driver',
-                ],
-            ],
-        ]);
+        $manager = $this->getManager();
         $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('Unsupported driver [foo-driver]');
+        $this->expectExceptionMessage('Unsupported driver [foo]');
         $manager->connection('foo');
     }
 
