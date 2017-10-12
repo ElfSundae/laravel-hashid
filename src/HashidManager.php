@@ -106,11 +106,25 @@ class HashidManager extends Manager
             return $this->callCustomCreator($driver, compact('config'));
         }
 
-        if ($this->app->bound($key = "hashid.driver.{$driver}")) {
-            return $this->resolveFromContainer($key, compact('config'));
+        if ($binding = $this->getBindingForDriver($driver)) {
+            return $this->resolveFromContainer($binding, compact('config'));
         }
 
         throw new InvalidArgumentException("Unsupported driver [$driver]");
+    }
+
+    /**
+     * Get the container binding for the driver.
+     *
+     * @param  string  $driver
+     * @return string|null
+     */
+    protected function getBindingForDriver($driver)
+    {
+        return Arr::first(
+            [$driver, "hashid.driver.".$driver],
+            [$this->app, 'bound']
+        );
     }
 
     /**
