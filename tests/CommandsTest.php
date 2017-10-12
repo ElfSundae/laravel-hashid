@@ -19,12 +19,7 @@ class CommandsTest extends TestCase
 
     protected function callCommand($command)
     {
-        return $this->getArtisan()->call($command);
-    }
-
-    protected function getArtisan()
-    {
-        return $this->app['Illuminate\Contracts\Console\Kernel'];
+        return $this->app['Illuminate\Contracts\Console\Kernel']->call($command);
     }
 
     protected function getPackageProviders($app)
