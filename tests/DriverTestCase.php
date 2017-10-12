@@ -23,7 +23,7 @@ abstract class DriverTestCase extends TestCase
 
         $makeWith = method_exists($this->app, 'makeWith') ? 'makeWith' : 'make';
 
-        return $this->app->{$makeWith}($driver ?: $this->driver, compact('config'));
+        return $this->app->$makeWith($driver ?: $this->driver, compact('config'));
     }
 
     protected function assertEncodedData($data, $encodedData, $driver = null, array $config = [])

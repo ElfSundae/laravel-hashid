@@ -149,7 +149,7 @@ class HashidManager extends Manager
 
         $makeWith = method_exists($this->app, 'makeWith') ? 'makeWith' : 'make';
 
-        return $this->app->{$makeWith}($abstract, $parameters);
+        return $this->app->$makeWith($abstract, $parameters);
     }
 
     /**
