@@ -121,10 +121,11 @@ class HashidManager extends Manager
      */
     protected function getBindingForDriver($driver)
     {
-        return Arr::first(
-            [$driver, 'hashid.driver.'.$driver],
-            [$this->app, 'bound']
-        );
+        foreach ([$driver, 'hashid.driver.'.$driver] as $name) {
+            if ($this->app->bound($name)) {
+                return $name;
+            }
+        }
     }
 
     /**
