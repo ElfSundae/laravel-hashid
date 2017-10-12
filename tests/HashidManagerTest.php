@@ -7,14 +7,20 @@ use ElfSundae\Laravel\Hashid\HashidManager;
 
 class HashidManagerTest extends TestCase
 {
-    public function testAccessDefaultConnection()
+    public function testGetDefaultConnection()
     {
         $manager = $this->getManager([
             'default' => 'foo',
         ]);
         $this->assertSame('foo', $manager->getDefaultConnection());
-        $this->assertSame($manager, $manager->setDefaultConnection('bar'));
-        $this->assertSame('bar', $manager->getDefaultConnection());
+    }
+
+    public function testSetDefaultConnection()
+    {
+        $manager = $this->getManager();
+        $this->assertSame($manager, $manager->setDefaultConnection('foo'));
+        $this->assertSame('foo', $manager->getDefaultConnection());
+        $this->assertSame('foo', $this->app['config']['hashid.default']);
     }
 
     public function testNoneDriver()
