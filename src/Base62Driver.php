@@ -30,6 +30,7 @@ class Base62Driver implements DriverInterface
     public function __construct(array $config = [])
     {
         $options = Arr::only($config, ['characters']);
+
         $this->base62 = extension_loaded('gmp')
             ? new GmpEncoder($options) : new PhpEncoder($options);
     }
