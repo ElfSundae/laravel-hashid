@@ -143,7 +143,7 @@ class HashidManager extends Manager
      */
     protected function resolveFromContainer($abstract, array $parameters = [])
     {
-        if (empty($parameters) && $this->app->isShared($abstract)) {
+        if ($this->app->isShared($abstract)) {
             return $this->app->make($abstract);
         }
 
