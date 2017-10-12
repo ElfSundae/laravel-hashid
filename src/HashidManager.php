@@ -90,17 +90,6 @@ class HashidManager extends Manager
     }
 
     /**
-     * Get the configuration for a connection.
-     *
-     * @param  string  $name
-     * @return array
-     */
-    protected function configuration($name)
-    {
-        return Arr::get($this->app['config']['hashid.connections'], $name, []);
-    }
-
-    /**
      * Create a new hashid connection instance for the driver.
      *
      * We will check to see if a creator method exists for the given driver,
@@ -149,5 +138,16 @@ class HashidManager extends Manager
         $makeWith = method_exists($this->app, 'makeWith') ? 'makeWith' : 'make';
 
         return $this->app->{$makeWith}($abstract, $parameters);
+    }
+
+    /**
+     * Get the configuration for a connection.
+     *
+     * @param  string  $name
+     * @return array
+     */
+    protected function configuration($name)
+    {
+        return Arr::get($this->app['config']['hashid.connections'], $name, []);
     }
 }
