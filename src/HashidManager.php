@@ -128,7 +128,7 @@ class HashidManager extends Manager
     }
 
     /**
-     * Resolve the given type from the container.
+     * Resolve the given binding from the container.
      *
      * NOTE:
      * `Container::make($abstract, $parameters)` which can pass additional
@@ -143,7 +143,7 @@ class HashidManager extends Manager
      */
     protected function resolveFromContainer($abstract, array $parameters = [])
     {
-        if ($this->app->isShared($abstract)) {
+        if (empty($parameters) && $this->app->isShared($abstract)) {
             return $this->app->make($abstract);
         }
 
