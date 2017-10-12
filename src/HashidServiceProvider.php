@@ -101,13 +101,13 @@ class HashidServiceProvider extends ServiceProvider
     protected function getClassAliases()
     {
         return [
-            Base62Driver::class => 'hashid.driver.base62',
-            Base62IntegerDriver::class => 'hashid.driver.base62.integer',
-            HashidsDriver::class => 'hashid.driver.hashids',
-            HashidsHexDriver::class => 'hashid.driver.hashids.hex',
-            HashidsIntegerDriver::class => 'hashid.driver.hashids.integer',
-            HashidsStringDriver::class => 'hashid.driver.hashids.string',
-            OptimusDriver::class => 'hashid.driver.optimus',
+            'hashid.driver.base62' => Base62Driver::class,
+            'hashid.driver.base62.integer' => Base62IntegerDriver::class,
+            'hashid.driver.hashids' => HashidsDriver::class,
+            'hashid.driver.hashids.hex' => HashidsHexDriver::class,
+            'hashid.driver.hashids.integer' => HashidsIntegerDriver::class,
+            'hashid.driver.hashids.string' => HashidsStringDriver::class,
+            'hashid.driver.optimus' => OptimusDriver::class,
         ];
     }
 
