@@ -7,8 +7,8 @@ return [
     | Default Hashid Connection Name
     |--------------------------------------------------------------------------
     |
-    | Here you may specify which of the hashid connections below you wish
-    | to use as your default connection for all hashid work. Of course
+    | Here you may specify which of the hashid driver or connections below you
+    | wish to use as your default connection for all hashid work. Of course
     | you may use many connections at once using the Hashid manager.
     |
     */
@@ -23,6 +23,10 @@ return [
     | Here are each of the hashid connections setup for your application.
     | Of course, examples of configuring each hashid driver is shown below
     | to make development simple. You are free to add more.
+    |
+    | Built-in drivers: "base62", "base62.integer", "base64", "base64.integer",
+    | "hashids", "hashids.hex", "hashids.integer", "hashids.string",
+    | "hex", "hex.integer", "optimus".
     |
     */
 
