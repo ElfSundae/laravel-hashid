@@ -12,6 +12,8 @@ class Base64IntegerDriver extends Base64Driver
      */
     public function decode($data)
     {
-        return (int) parent::decode($data);
+        $int = (int) ($decoded = parent::decode($data));
+
+        return (string) $int === $decoded ? $int : 0;
     }
 }
