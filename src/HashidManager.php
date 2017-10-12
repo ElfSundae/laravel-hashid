@@ -107,7 +107,7 @@ class HashidManager extends Manager
         }
 
         if ($binding = $this->getBindingForDriver($driver)) {
-            return $this->resolveFromContainer($binding, compact('config'));
+            return $this->resolveBinding($binding, compact('config'));
         }
 
         throw new InvalidArgumentException("Unsupported driver [$driver]");
@@ -142,7 +142,7 @@ class HashidManager extends Manager
      * @param  array  $parameters
      * @return mixed
      */
-    protected function resolveFromContainer($abstract, array $parameters = [])
+    protected function resolveBinding($abstract, array $parameters = [])
     {
         if ($this->app->isShared($abstract)) {
             return $this->app->make($abstract);
