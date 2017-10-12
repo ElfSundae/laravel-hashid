@@ -6,7 +6,11 @@ use Orchestra\Testbench\TestCase;
 
 abstract class DriverTestCase extends TestCase
 {
-    /** @var string driver class or binding key */
+    /**
+     * The driver class or binding name.
+     *
+     * @var string
+     */
     protected $driver;
 
     protected function makeDriver($driver = null, array $config = [])
