@@ -38,6 +38,9 @@ class HashidsDriverTest extends DriverTestCase
         $this->assertEncodedData(1, 'jR', $this->integerDriver);
         $this->runForIntegers($this->integerDriver);
         $this->assertUniformEncoding(random_int(0, PHP_INT_MAX), $this->integerDriver);
+        $integerDriver = $this->makeDriver($this->integerDriver);
+        $encoded = $integerDriver->encode([1, 2, 3]);
+        $this->assertSame(0, $integerDriver->decode($encoded));
 
         $this->assertEncodedData('Hashid', 'mWxDrOkZ49', $this->stringDriver);
         $this->runForBytes($this->stringDriver);

@@ -12,8 +12,8 @@ class HashidsIntegerDriver extends HashidsDriver
      */
     public function decode($data)
     {
-        $result = parent::decode($data);
+        $decoded = parent::decode($data);
 
-        return (int) reset($result);
+        return 1 === count($decoded) ? reset($decoded) : 0;
     }
 }
