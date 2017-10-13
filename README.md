@@ -9,6 +9,8 @@
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/ElfSundae/laravel-hashid/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/ElfSundae/laravel-hashid/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/elfsundae/laravel-hashid.svg?style=flat-square)](https://packagist.org/packages/elfsundae/laravel-hashid)
 
+Laravel Hashid provides a convenient, easy to use, unified API to obfuscate your data by generating reversible, URL safe identifiers for numbers, strings or bytes. It supports multiple connections dealing with a variety of encoders or encoding options.
+
 ## Installation
 
 You can install this package using the [Composer](https://getcomposer.org) manager:
@@ -33,7 +35,15 @@ $ php artisan vendor:publish --tag=hashid
 $ cp vendor/elfsundae/laravel-hashid/config/hashid.php config/hashid.php
 ```
 
-## Usage
+## Configuration
+
+## Hashid Usage
+
+## Extending
+
+### Adding Custom Drivers
+
+### Extend Existing Connections Or Drivers
 
 ## Testing
 
