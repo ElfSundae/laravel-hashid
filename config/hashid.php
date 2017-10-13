@@ -77,22 +77,6 @@ return [
             'characters' => env('BASE62_INTEGER_CHARACTERS', '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'),
         ],
 
-        'base64' => [
-            'driver' => 'base64',
-        ],
-
-        'base64_integer' => [
-            'driver' => 'base64.integer',
-        ],
-
-        'hex' => [
-            'driver' => 'hex',
-        ],
-
-        'hex_integer' => [
-            'driver' => 'hex.integer',
-        ],
-
     ],
 
 ];
