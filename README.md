@@ -11,8 +11,26 @@
 
 ## Installation
 
+You can install this package using the [Composer](https://getcomposer.org) manager:
+
 ```sh
 $ composer require elfsundae/laravel-hashid
+```
+
+For Laravel before v5.5 or Lumen, you need to register the service manually:
+
+```php
+ElfSundae\Laravel\Hashid\HashidServiceProvider::class
+```
+
+Then publish the configuration file:
+
+```sh
+# For Laravel application:
+$ php artisan vendor:publish --tag=hashid
+
+# For Lumen application:
+$ cp vendor/elfsundae/laravel-hashid/config/hashid.php config/hashid.php
 ```
 
 ## Usage
