@@ -65,30 +65,28 @@ class HashidManager extends Manager
      */
     protected function createDriver($name)
     {
-        $config = $this->configuration($name);
+        $config = Arr::get($this->app['config']['hashid.connections'], $name, []);
 
-        if (isset($this->customCreators[$name])) {
-            return $this->callCustomCreator($name, compact('config'));
-        }
-
-        $driver = Arr::pull($config, 'driver', $name);
-
-        return $this->createConnectionForDriver($driver, $config);
+        return $this->createForConnection($name, $config) ?:
+            $this->createForDriver(Arr::pull($config, 'driver', $name), $config);
     }
 
     /**
-     * {@inheritdoc}
+     * Create a new driver instance for the given connection.
+     *
+     * @param  string  $name
+     * @param  array  $config
+     * @return mixed
      */
-    protected function callCustomCreator($driver)
+    protected function createForConnection($name, array $config = [])
     {
-        return $this->app->call(
-            $this->customCreators[$driver],
-            func_num_args() > 1 ? func_get_arg(1) : []
-        );
+        if (isset($this->customCreators[$name])) {
+            return $this->callCustom($name, compact('config'));
+        }
     }
 
     /**
-     * Create a new hashid connection instance for the driver.
+     * Create a new driver instance for the given driver.
      *
      * We will check to see if a creator method exists for the given driver,
      * and will call the Closure if so, which allows us to have a more generic
@@ -100,13 +98,13 @@ class HashidManager extends Manager
      *
      * @throws \InvalidArgumentException
      */
-    protected function createConnectionForDriver($driver, array $config = [])
+    protected function createForDriver($driver, array $config = [])
     {
         if (isset($this->customCreators[$driver])) {
-            return $this->callCustomCreator($driver, compact('config'));
+            return $this->callCustom($driver, compact('config'));
         }
 
-        if ($binding = $this->getBindingForDriver($driver)) {
+        if ($binding = $this->getBindingKeyForDriver($driver)) {
             return $this->resolveBinding($binding, compact('config'));
         }
 
@@ -114,12 +112,24 @@ class HashidManager extends Manager
     }
 
     /**
-     * Get the container binding for the driver.
+     * Call a custom creator.
+     *
+     * @param  string  $key
+     * @param  array  $parameters
+     * @return mixed
+     */
+    protected function callCustom($key, array $parameters = [])
+    {
+        return $this->app->call($this->customCreators[$key], $parameters);
+    }
+
+    /**
+     * Get the binding key for the driver.
      *
      * @param  string  $driver
      * @return string|null
      */
-    protected function getBindingForDriver($driver)
+    protected function getBindingKeyForDriver($driver)
     {
         foreach ([$driver, "hashid.driver.$driver"] as $name) {
             if ($this->app->bound($name)) {
@@ -138,29 +148,18 @@ class HashidManager extends Manager
      * as `makeWith()` in v5.4.16 (https://github.com/laravel/framework/pull/18271).
      * And in L55 the `makeWith()` is just an alias to `make()`.
      *
-     * @param  string  $abstract
+     * @param  string  $key
      * @param  array  $parameters
      * @return mixed
      */
-    protected function resolveBinding($abstract, array $parameters = [])
+    protected function resolveBinding($key, array $parameters = [])
     {
-        if ($this->app->isShared($abstract)) {
-            return $this->app->make($abstract);
+        if ($this->app->isShared($key)) {
+            return $this->app->make($key);
         }
 
         $makeWith = method_exists($this->app, 'makeWith') ? 'makeWith' : 'make';
 
-        return $this->app->$makeWith($abstract, $parameters);
-    }
-
-    /**
-     * Get the configuration for a connection.
-     *
-     * @param  string  $name
-     * @return array
-     */
-    protected function configuration($name)
-    {
-        return Arr::get($this->app['config']['hashid.connections'], $name, []);
+        return $this->app->$makeWith($key, $parameters);
     }
 }
