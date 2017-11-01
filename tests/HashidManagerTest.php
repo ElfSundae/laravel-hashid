@@ -114,7 +114,7 @@ class HashidManagerTest extends TestCase
             ],
         ]);
 
-        $this->app->bind('foo-driver', FooDriver::class);
+        $this->app->bind('hashid.driver.foo-driver', FooDriver::class);
 
         $fooConnection = $manager->connection('foo');
         $this->assertInstanceOf(FooDriver::class, $fooConnection);
@@ -125,24 +125,22 @@ class HashidManagerTest extends TestCase
         $this->assertEquals([], $fooDriver->config);
     }
 
-    public function testResolvedDriverBindingUsingShortBindingName()
+    public function testResolvedDriverAsClass()
     {
         $manager = $this->getManager([
             'connections' => [
                 'foo' => [
-                    'driver' => 'foo-driver',
+                    'driver' => FooDriver::class,
                     'key' => 'value',
                 ],
             ],
         ]);
 
-        $this->app->bind('hashid.driver.foo-driver', FooDriver::class);
-
         $fooConnection = $manager->connection('foo');
         $this->assertInstanceOf(FooDriver::class, $fooConnection);
         $this->assertEquals(['key' => 'value'], $fooConnection->config);
 
-        $fooDriver = $manager->connection('foo-driver');
+        $fooDriver = $manager->connection(FooDriver::class);
         $this->assertInstanceOf(FooDriver::class, $fooDriver);
         $this->assertEquals([], $fooDriver->config);
     }
@@ -159,7 +157,7 @@ class HashidManagerTest extends TestCase
         ]);
 
         $driver = new FooDriver;
-        $this->app->instance('foo-driver', $driver);
+        $this->app->instance('hashid.driver.foo-driver', $driver);
 
         $this->assertSame($driver, $manager->connection('foo'));
         $this->assertSame($driver, $manager->connection('foo-driver'));
@@ -176,7 +174,7 @@ class HashidManagerTest extends TestCase
             ],
         ]);
 
-        $this->app->bind('bar-driver', BarDriver::class);
+        $this->app->bind('hashid.driver.bar-driver', BarDriver::class);
 
         $barConnection = $manager->connection('bar');
         $this->assertInstanceOf(BarDriver::class, $barConnection);
