@@ -50,19 +50,39 @@ class HashidServiceProvider extends ServiceProvider
         });
         $this->app->alias('hashid', HashidManager::class);
 
-        foreach ([
+        foreach ($this->getSingletonDrivers() as $class) {
+            $this->app->singleton($key = $this->getBindingKeyForDriver($class), $class);
+            $this->app->alias($key, $class);
+        }
+
+        foreach ($this->getNonSingletonDrivers() as $class) {
+            $this->app->bind($this->getBindingKeyForDriver($class), $class);
+        }
+    }
+
+    /**
+     * Get singleton drivers classes.
+     *
+     * @return array
+     */
+    protected function getSingletonDrivers()
+    {
+        return [
             Base64Driver::class,
             Base64IntegerDriver::class,
             HexDriver::class,
             HexIntegerDriver::class,
-        ] as $class) {
-            $key = $this->getBindingKeyForDriver($class);
+        ];
+    }
 
-            $this->app->singleton($key, $class);
-            $this->app->alias($key, $class);
-        }
-
-        foreach ([
+    /**
+     * Get non-singleton drivers classes.
+     *
+     * @return array
+     */
+    protected function getNonSingletonDrivers()
+    {
+        return [
             Base62Driver::class,
             Base62IntegerDriver::class,
             HashidsDriver::class,
@@ -70,9 +90,7 @@ class HashidServiceProvider extends ServiceProvider
             HashidsIntegerDriver::class,
             HashidsStringDriver::class,
             OptimusDriver::class,
-        ] as $class) {
-            $this->app->bind($this->getBindingKeyForDriver($class), $class);
-        }
+        ];
     }
 
     /**
