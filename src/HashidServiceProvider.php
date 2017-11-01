@@ -45,11 +45,15 @@ class HashidServiceProvider extends ServiceProvider
      */
     protected function registerServices()
     {
+        $this->app->singleton('hashid', function ($app) {
+            return new HashidManager($app);
+        });
+        $this->app->alias('hashid', HashidManager::class);
+
         foreach ($this->getSingletonBindings() as $abstract => $concrete) {
             $this->app->singleton($abstract, function ($app) use ($concrete) {
-                return $this->createInstance($concrete, [$app]);
+                return new $concrete;
             });
-
             $this->app->alias($abstract, $concrete);
         }
 
@@ -63,21 +67,6 @@ class HashidServiceProvider extends ServiceProvider
     }
 
     /**
-     * Create a new instance from class name.
-     *
-     * @param  string  $class
-     * @param  array  $args
-     * @return mixed
-     */
-    protected function createInstance($class, array $args = [])
-    {
-        $reflector = new ReflectionClass($class);
-
-        return is_null($reflector->getConstructor())
-            ? new $class : $reflector->newInstanceArgs($args);
-    }
-
-    /**
      * Get singleton bindings to be registered.
      *
      * @return array
@@ -85,7 +74,6 @@ class HashidServiceProvider extends ServiceProvider
     protected function getSingletonBindings()
     {
         return [
-            'hashid' => HashidManager::class,
             'hashid.driver.base64' => Base64Driver::class,
             'hashid.driver.base64.integer' => Base64IntegerDriver::class,
             'hashid.driver.hex' => HexDriver::class,
