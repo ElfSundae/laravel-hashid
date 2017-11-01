@@ -36,157 +36,135 @@ class HashidManagerTest extends TestCase
     {
         $manager = $this->getManager([
             'connections' => [
-                'foo' => [
-                    'driver' => 'foo-driver',
+                'test' => [
+                    'driver' => 'test-driver',
                     'key' => 'value',
                 ],
             ],
         ]);
 
-        $manager->extend('foo', function ($config) {
-            $this->assertEquals(['driver' => 'foo-driver', 'key' => 'value'], $config);
+        $manager->extend('test', function ($config) {
+            $this->assertEquals(['driver' => 'test-driver', 'key' => 'value'], $config);
 
-            return 'FooConnection';
+            return 'TestConnection';
         });
-        $this->assertSame('FooConnection', $manager->connection('foo'));
+        $this->assertSame('TestConnection', $manager->connection('test'));
     }
 
     public function testInvokedCustomDriverCreator()
     {
         $manager = $this->getManager([
             'connections' => [
-                'foo' => [
-                    'driver' => 'foo-driver',
+                'test' => [
+                    'driver' => 'test-driver',
                     'key' => 'value',
                 ],
             ],
         ]);
 
-        $manager->extend('foo-driver', function ($config) {
-            return new FooDriver($config);
+        $manager->extend('test-driver', function ($config) {
+            return new TestDriver(null, $config);
         });
 
-        $fooConnection = $manager->connection('foo');
-        $this->assertInstanceOf(FooDriver::class, $fooConnection);
-        $this->assertEquals(['key' => 'value'], $fooConnection->config);
+        $connection = $manager->connection('test');
+        $this->assertInstanceOf(TestDriver::class, $connection);
+        $this->assertEquals(['key' => 'value'], $connection->config);
 
-        $fooDriver = $manager->connection('foo-driver');
-        $this->assertInstanceOf(FooDriver::class, $fooDriver);
-        $this->assertEquals([], $fooDriver->config);
+        $driver = $manager->connection('test-driver');
+        $this->assertInstanceOf(TestDriver::class, $driver);
+        $this->assertEquals([], $driver->config);
     }
 
     public function testInvokedCustomCreatorWithDependencies()
     {
         $manager = $this->getManager([
             'connections' => [
-                'foo' => [
-                    'driver' => 'foo-driver',
+                'test' => [
+                    'driver' => 'test-driver',
                     'key' => 'value',
                 ],
             ],
         ]);
 
-        $manager->extend('foo', function (Container $app, $config) {
+        $manager->extend('test', function (Container $app, $config) {
             $this->assertSame($this->app, $app);
-            $this->assertEquals(['driver' => 'foo-driver', 'key' => 'value'], $config);
+            $this->assertEquals(['driver' => 'test-driver', 'key' => 'value'], $config);
 
-            return 'FooConnection';
+            return 'TestConnection';
         });
-        $this->assertSame('FooConnection', $manager->connection('foo'));
+        $this->assertSame('TestConnection', $manager->connection('test'));
 
-        $manager->extend('bar-driver', function (Container $app, $config) {
+        $manager->extend('foo-driver', function (Container $app, $config) {
             $this->assertSame($this->app, $app);
             $this->assertEquals([], $config);
 
-            return 'BarDriver';
+            return 'FooDriver';
         });
-        $this->assertSame('BarDriver', $manager->connection('bar-driver'));
+        $this->assertSame('FooDriver', $manager->connection('foo-driver'));
     }
 
     public function testResolvedDriverBinding()
     {
         $manager = $this->getManager([
             'connections' => [
-                'foo' => [
-                    'driver' => 'foo-driver',
+                'test' => [
+                    'driver' => 'test-driver',
                     'key' => 'value',
                 ],
             ],
         ]);
 
-        $this->app->bind('foo-driver', FooDriver::class);
+        $this->app->bind('hashid.driver.test-driver', TestDriver::class);
 
-        $fooConnection = $manager->connection('foo');
-        $this->assertInstanceOf(FooDriver::class, $fooConnection);
-        $this->assertEquals(['key' => 'value'], $fooConnection->config);
+        $connection = $manager->connection('test');
+        $this->assertInstanceOf(TestDriver::class, $connection);
+        $this->assertSame($this->app, $connection->container);
+        $this->assertEquals(['key' => 'value'], $connection->config);
 
-        $fooDriver = $manager->connection('foo-driver');
-        $this->assertInstanceOf(FooDriver::class, $fooDriver);
-        $this->assertEquals([], $fooDriver->config);
+        $driver = $manager->connection('test-driver');
+        $this->assertInstanceOf(TestDriver::class, $driver);
+        $this->assertSame($this->app, $driver->container);
+        $this->assertEquals([], $driver->config);
     }
 
-    public function testResolvedDriverBindingUsingShortBindingName()
+    public function testResolvedDriverAsClass()
     {
         $manager = $this->getManager([
             'connections' => [
-                'foo' => [
-                    'driver' => 'foo-driver',
+                'test' => [
+                    'driver' => TestDriver::class,
                     'key' => 'value',
                 ],
             ],
         ]);
 
-        $this->app->bind('hashid.driver.foo-driver', FooDriver::class);
+        $connection = $manager->connection('test');
+        $this->assertInstanceOf(TestDriver::class, $connection);
+        $this->assertSame($this->app, $connection->container);
+        $this->assertEquals(['key' => 'value'], $connection->config);
 
-        $fooConnection = $manager->connection('foo');
-        $this->assertInstanceOf(FooDriver::class, $fooConnection);
-        $this->assertEquals(['key' => 'value'], $fooConnection->config);
-
-        $fooDriver = $manager->connection('foo-driver');
-        $this->assertInstanceOf(FooDriver::class, $fooDriver);
-        $this->assertEquals([], $fooDriver->config);
+        $driver = $manager->connection(TestDriver::class);
+        $this->assertInstanceOf(TestDriver::class, $driver);
+        $this->assertSame($this->app, $driver->container);
+        $this->assertEquals([], $driver->config);
     }
 
     public function testResolvedSharedDriverBinding()
     {
         $manager = $this->getManager([
             'connections' => [
-                'foo' => [
-                    'driver' => 'foo-driver',
+                'test' => [
+                    'driver' => 'test-driver',
                     'key' => 'value',
                 ],
             ],
         ]);
 
-        $driver = new FooDriver;
-        $this->app->instance('foo-driver', $driver);
+        $driver = new TestDriver;
+        $this->app->instance('hashid.driver.test-driver', $driver);
 
-        $this->assertSame($driver, $manager->connection('foo'));
-        $this->assertSame($driver, $manager->connection('foo-driver'));
-    }
-
-    public function testResolvedDriverBindingWithDependencies()
-    {
-        $manager = $this->getManager([
-            'connections' => [
-                'bar' => [
-                    'driver' => 'bar-driver',
-                    'key' => 'value',
-                ],
-            ],
-        ]);
-
-        $this->app->bind('bar-driver', BarDriver::class);
-
-        $barConnection = $manager->connection('bar');
-        $this->assertInstanceOf(BarDriver::class, $barConnection);
-        $this->assertSame($this->app, $barConnection->container);
-        $this->assertEquals(['key' => 'value'], $barConnection->config);
-
-        $barDriver = $manager->connection('bar-driver');
-        $this->assertInstanceOf(BarDriver::class, $barDriver);
-        $this->assertSame($this->app, $barDriver->container);
-        $this->assertEquals([], $barDriver->config);
+        $this->assertSame($driver, $manager->connection('test'));
+        $this->assertSame($driver, $manager->connection('test-driver'));
     }
 
     public function testGetConnections()
@@ -214,17 +192,7 @@ class HashidManagerTest extends TestCase
     }
 }
 
-class FooDriver
-{
-    public $config;
-
-    public function __construct($config = null)
-    {
-        $this->config = $config;
-    }
-}
-
-class BarDriver
+class TestDriver
 {
     public $container;
     public $config;
