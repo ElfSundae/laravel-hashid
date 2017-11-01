@@ -7,7 +7,7 @@ return [
     | Default Hashid Connection Name
     |--------------------------------------------------------------------------
     |
-    | Here you may specify which of the hashid driver or connections below you
+    | Here you may specify which of the hashid drivers or connections below you
     | wish to use as your default connection for all hashid work. Of course
     | you may use many connections at once using the Hashid manager.
     |
