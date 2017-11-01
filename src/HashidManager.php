@@ -121,7 +121,7 @@ class HashidManager extends Manager
      */
     protected function getBindingForDriver($driver)
     {
-        foreach ([$driver, 'hashid.driver.'.$driver] as $name) {
+        foreach ([$driver, "hashid.driver.$driver"] as $name) {
             if ($this->app->bound($name)) {
                 return $name;
             }
