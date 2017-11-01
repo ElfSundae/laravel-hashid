@@ -21,6 +21,5 @@ class HashidServiceProviderTest extends TestCase
         $manager = $this->app['hashid'];
         $this->assertSame($manager, $this->app[HashidManager::class]);
         $this->assertSame($manager, Hashid::getFacadeRoot());
-        $this->assertSame($manager->connection(), $this->app['hashid.connection']);
     }
 }

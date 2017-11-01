@@ -2,7 +2,7 @@
 
 namespace ElfSundae\Laravel\Hashid;
 
-use ReflectionClass;
+use Illuminate\Support\Str;
 use Illuminate\Support\ServiceProvider;
 
 class HashidServiceProvider extends ServiceProvider
@@ -50,53 +50,42 @@ class HashidServiceProvider extends ServiceProvider
         });
         $this->app->alias('hashid', HashidManager::class);
 
-        foreach ($this->getSingletonBindings() as $abstract => $concrete) {
-            $this->app->singleton($abstract, function ($app) use ($concrete) {
-                return new $concrete;
-            });
-            $this->app->alias($abstract, $concrete);
+        foreach ([
+            Base64Driver::class,
+            Base64IntegerDriver::class,
+            HexDriver::class,
+            HexIntegerDriver::class,
+        ] as $class) {
+            $key = $this->getBindingKeyForDriver($class);
+
+            $this->app->singleton($key, $class);
+            $this->app->alias($key, $class);
         }
 
-        foreach ($this->getAliasesBindings() as $abstract => $concrete) {
-            $this->app->bind($abstract, $concrete);
+        foreach ([
+            Base62Driver::class,
+            Base62IntegerDriver::class,
+            HashidsDriver::class,
+            HashidsHexDriver::class,
+            HashidsIntegerDriver::class,
+            HashidsStringDriver::class,
+            OptimusDriver::class,
+        ] as $class) {
+            $this->app->bind($this->getBindingKeyForDriver($class), $class);
         }
-
-        $this->app->bind('hashid.connection', function ($app) {
-            return $app['hashid']->connection();
-        });
     }
 
     /**
-     * Get singleton bindings to be registered.
+     * Get the binding key for the driver class.
      *
-     * @return array
+     * @param  string  $class
+     * @return string
      */
-    protected function getSingletonBindings()
+    protected function getBindingKeyForDriver($class)
     {
-        return [
-            'hashid.driver.base64' => Base64Driver::class,
-            'hashid.driver.base64.integer' => Base64IntegerDriver::class,
-            'hashid.driver.hex' => HexDriver::class,
-            'hashid.driver.hex.integer' => HexIntegerDriver::class,
-        ];
-    }
-
-    /**
-     * Get class aliases to be registered.
-     *
-     * @return array
-     */
-    protected function getAliasesBindings()
-    {
-        return [
-            'hashid.driver.base62' => Base62Driver::class,
-            'hashid.driver.base62.integer' => Base62IntegerDriver::class,
-            'hashid.driver.hashids' => HashidsDriver::class,
-            'hashid.driver.hashids.hex' => HashidsHexDriver::class,
-            'hashid.driver.hashids.integer' => HashidsIntegerDriver::class,
-            'hashid.driver.hashids.string' => HashidsStringDriver::class,
-            'hashid.driver.optimus' => OptimusDriver::class,
-        ];
+        return 'hashid.driver.'.Str::snake(
+            preg_replace('#Driver$#', '', class_basename($class))
+        );
     }
 
     /**

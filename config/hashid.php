@@ -24,9 +24,9 @@ return [
     | Of course, examples of configuring each hashid driver is shown below
     | to make development simple. You are free to add more.
     |
-    | Built-in drivers: "base62", "base62.integer", "base64", "base64.integer",
-    | "hashids", "hashids.hex", "hashids.integer", "hashids.string",
-    | "hex", "hex.integer", "optimus".
+    | Built-in drivers: "base62", "base62_integer", "base64", "base64_integer",
+    | "hashids", "hashids_hex", "hashids_integer", "hashids_string",
+    | "hex", "hex_integer", "optimus".
     |
     */
 
@@ -40,21 +40,21 @@ return [
         ],
 
         'hashids_integer' => [
-            'driver' => 'hashids.integer',
+            'driver' => 'hashids_integer',
             'salt' => env('HASHIDS_INTEGER_SALT', ''),
             'min_length' => env('HASHIDS_INTEGER_MIN_LENGTH', 0),
             'alphabet' => env('HASHIDS_INTEGER_ALPHABET', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'),
         ],
 
         'hashids_hex' => [
-            'driver' => 'hashids.hex',
+            'driver' => 'hashids_hex',
             'salt' => env('HASHIDS_HEX_SALT', ''),
             'min_length' => env('HASHIDS_HEX_MIN_LENGTH', 0),
             'alphabet' => env('HASHIDS_HEX_ALPHABET', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'),
         ],
 
         'hashids_string' => [
-            'driver' => 'hashids.string',
+            'driver' => 'hashids_string',
             'salt' => env('HASHIDS_STRING_SALT', ''),
             'min_length' => env('HASHIDS_STRING_MIN_LENGTH', 0),
             'alphabet' => env('HASHIDS_STRING_ALPHABET', 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890'),
@@ -73,7 +73,7 @@ return [
         ],
 
         'base62_integer' => [
-            'driver' => 'base62.integer',
+            'driver' => 'base62_integer',
             'characters' => env('BASE62_INTEGER_CHARACTERS', '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'),
         ],
 
