@@ -17,6 +17,11 @@ Laravel Hashid provides a unified API across various drivers such as [Base62], [
 - [Configuration](#configuration)
 - [Usage](#usage)
 - [Built-in Drivers](#built-in-drivers)
+    - [Base62](#base62)
+    - [Base64](#base64)
+    - [Hashids](#hashids)
+    - [Hex](#hex)
+    - [Optimus](#optimus)
 - [Extending](#extending)
     - [Adding Custom Drivers](#adding-custom-drivers)
     - [Extend Existing Connections Or Drivers](#extend-existing-connections-or-drivers)
@@ -66,16 +71,16 @@ Let's see an example of the configuration:
         'driver' => 'base64',
     ],
 
+    'hashids' => [
+        'driver' => 'hashids',
+        'salt' => 'sweet girl',
+    ],
+
     'id' => [
         'driver' => 'hashids_integer',
         'salt' => 'My Application',
         'min_length' => 6,
         'alphabet' => '1234567890abcdef',
-    ],
-
-    'hashids' => [
-        'driver' => 'hashids',
-        'salt' => 'sweet girl',
     ],
 
     'base62' => [
@@ -134,6 +139,46 @@ hashid_decode('TGFyYXZlbA', 'base64');
 
 ## Built-in Drivers
 
+### Base62
+
+- Website: https://github.com/tuupola/base62
+- Drivers: `base62` , `base62_integer`
+- Configuration:
+    - `characters` : 62 unique characters
+- Notes:
+    - You may use `$ php artisan hashid:alphabet` to generate random characters.
+    - [GMP] is strongly recommended as it is much faster than pure PHP.
+
+### Base64
+
+- Website: https://github.com/ElfSundae/urlsafe-base64
+- Drivers: `base64` , `base64_integer`
+
+### Hashids
+
+- Website: http://hashids.org/php/
+- Drivers: `hashids` , `hashids_hex` , `hashids_integer` , `hashids_string`
+- Configuration:
+    - `salt`
+    - `min_length`
+    - `alphabet` : Must contain at least 16 unique characters
+
+### Hex
+
+- Drivers: `hex`, `hex_integer`
+
+### Optimus
+
+- Website: https://github.com/jenssegers/optimus
+- Drivers: `optimus`
+- Configuration:
+    - `prime` : Large prime number lower than `2147483647`
+    - `inverse` : The inverse prime so that `(PRIME * INVERSE) & MAXID == 1`
+    - `random` : A large random integer lower than `2147483647`
+- Notes:
+    - You may use `$ php artisan hashid:optimus` to generate needed numbers.
+    - Only for integer numbers.
+    - The max number can be encoded or decoded correctly is `2147483647`.
 
 ## Extending
 
@@ -155,3 +200,4 @@ This package is open-sourced software licensed under the [MIT License](LICENSE.m
 [base64]: https://github.com/ElfSundae/urlsafe-base64
 [hashids]: http://hashids.org/php/
 [optimus]: https://github.com/jenssegers/optimus
+[gmp]: https://secure.php.net/gmp
