@@ -9,13 +9,14 @@
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/ElfSundae/laravel-hashid/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/ElfSundae/laravel-hashid/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/elfsundae/laravel-hashid.svg?style=flat-square)](https://packagist.org/packages/elfsundae/laravel-hashid)
 
-Laravel Hashid provides a unified API across various drivers such as Base62, Hashids, Optimus, with support for multiple connections or different encoding options. It offers a convenient way to obfuscate your data by generating reversible, non-sequential, URL-safe identifiers.
+Laravel Hashid provides a unified API across various drivers such as [Base62], [Base64], [Hashids] and [Optimus], with support for multiple connections or different encoding options. It offers a convenient way to obfuscate your data by generating reversible, non-sequential, URL-safe identifiers.
 
 <!-- MarkdownTOC -->
 
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [Usage](#usage)
+- [Built-in Drivers](#built-in-drivers)
 - [Extending](#extending)
     - [Adding Custom Drivers](#adding-custom-drivers)
     - [Extend Existing Connections Or Drivers](#extend-existing-connections-or-drivers)
@@ -50,11 +51,11 @@ $ cp vendor/elfsundae/laravel-hashid/config/hashid.php config/hashid.php
 
 ## Configuration
 
-Our well documented configuration file is extremely similar to the configurations of numerous Laravel manager integrations such as Databases, Queues, Caches, or Filesystems. So you do not need to spend extra time to learn how to configure Hashid.
+Our well documented configuration file is extremely similar to the configurations of numerous Laravel manager integrations such as Database, Queue, Cache and Filesystem. So you do not need to spend extra time to learn how to configure Hashid.
 
-Additionally, for simplicity you do not need to add singleton drivers such as Base64 to your config file as they have no encoding options, unless you would like to specify a meaningful connection name.
+Additionally, for simplicity you do not need to add singleton drivers like Base64 to your config file as they have no encoding options, unless you would like to specify a meaningful connection name.
 
-Let's see an example of configuration:
+Let's see an example of the configuration:
 
 ```php
 'default' => 'id',
@@ -128,10 +129,11 @@ And there are also two corresponding helper functions:
 ```php
 hashid_encode(123456);
 
-hashid_encode(123456, 'hex_integer');
-
 hashid_decode('TGFyYXZlbA', 'base64');
 ```
+
+## Built-in Drivers
+
 
 ## Extending
 
@@ -148,3 +150,8 @@ $ composer test
 ## License
 
 This package is open-sourced software licensed under the [MIT License](LICENSE.md).
+
+[base62]: https://github.com/tuupola/base62
+[base64]: https://github.com/ElfSundae/urlsafe-base64
+[hashids]: http://hashids.org/php/
+[optimus]: https://github.com/jenssegers/optimus
