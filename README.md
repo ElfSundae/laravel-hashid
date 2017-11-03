@@ -11,6 +11,19 @@
 
 Laravel Hashid provides a unified API across various drivers such as Base62, Hashids, Optimus, with support for multiple connections or different encoding options. It offers a convenient way to obfuscate your data by generating reversible, non-sequential, URL-safe identifiers.
 
+<!-- MarkdownTOC -->
+
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [Extending](#extending)
+    - [Adding Custom Drivers](#adding-custom-drivers)
+    - [Extend Existing Connections Or Drivers](#extend-existing-connections-or-drivers)
+- [Testing](#testing)
+- [License](#license)
+
+<!-- /MarkdownTOC -->
+
 ## Installation
 
 You can install this package using the [Composer](https://getcomposer.org) manager:
@@ -19,7 +32,7 @@ You can install this package using the [Composer](https://getcomposer.org) manag
 $ composer require elfsundae/laravel-hashid
 ```
 
-For Laravel before v5.5 or Lumen, you need to register the service manually:
+For Lumen or earlier Laravel than v5.5, you need to register the service provider manually:
 
 ```php
 ElfSundae\Laravel\Hashid\HashidServiceProvider::class
@@ -37,7 +50,88 @@ $ cp vendor/elfsundae/laravel-hashid/config/hashid.php config/hashid.php
 
 ## Configuration
 
-## Hashid Usage
+Our well documented configuration file is extremely similar to the configurations of numerous Laravel manager integrations such as Databases, Queues, Caches, or Filesystems. So you do not need to spend extra time to learn how to configure Hashid.
+
+Additionally, for simplicity you do not need to add singleton drivers such as Base64 to your config file as they have no encoding options, unless you would like to specify a meaningful connection name.
+
+Let's see an example of configuration:
+
+```php
+'default' => 'id',
+
+'connections' => [
+
+    'basic' => [
+        'driver' => 'base64',
+    ],
+
+    'id' => [
+        'driver' => 'hashids_integer',
+        'salt' => 'My Application',
+        'min_length' => 6,
+        'alphabet' => '1234567890abcdef',
+    ],
+
+    'hashids' => [
+        'driver' => 'hashids',
+        'salt' => 'sweet girl',
+    ],
+
+    'base62' => [
+        'driver' => 'base62',
+        'characters' => 'f9FkqDbzmn0QRru7PBVeGl5pU28LgIvYwSydK41sCO3htaicjZoWAJNxH6EMTX',
+    ],
+
+],
+```
+
+## Usage
+
+The `hashid()` helper or the `Hashid` facade may be used to interact with any of your configured connections or drivers.
+
+```php
+use ElfSundae\Laravel\Hashid\Facades\Hashid;
+
+// Obtain the default connection instance
+hashid();
+Hashid::connection();
+
+// Obtain the "base62" connection instance
+hashid('base62');
+Hashid::connection('base62');
+
+// Obtain the Base64 driver instance
+hashid('base64');
+Hashid::connection('base64');
+```
+
+There are only two methods you need to know to use any connection or driver:
+
+ - `encode()` for encoding data.
+ - `decode()` for decoding data.
+
+```php
+hashid()->encode(123456);
+
+hashid('base64')->decode('TGFyYXZlbA');
+
+Hashid::encode(123456);
+
+Hashid::connection('hashids')->decode('xkNDJ');
+```
+
+And there are also two corresponding helper functions:
+
+- `hashid_encode($data, $name = null)`
+- `hashid_decode($data, $name = null)`
+
+```php
+hashid_encode(123456);
+
+hashid_encode(123456, 'hex_integer');
+
+hashid_decode('TGFyYXZlbA', 'base64');
+```
 
 ## Extending
 
