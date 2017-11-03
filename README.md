@@ -9,7 +9,7 @@
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/ElfSundae/laravel-hashid/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/ElfSundae/laravel-hashid/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/elfsundae/laravel-hashid.svg?style=flat-square)](https://packagist.org/packages/elfsundae/laravel-hashid)
 
-Laravel Hashid provides a convenient, easy to use, unified API to obfuscate your data by generating reversible, URL safe identifiers for numbers, strings or bytes. It supports multiple connections dealing with different drivers or encoding options.
+Laravel Hashid provides a unified API across various drivers such as Base62, Hashids, Optimus, with support for multiple connections or different encoding options. It offers a convenient way to obfuscate your data by generating reversible, non-sequential, URL-safe identifiers.
 
 ## Installation
 
