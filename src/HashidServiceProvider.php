@@ -51,7 +51,12 @@ class HashidServiceProvider extends ServiceProvider
         $this->app->alias('hashid', HashidManager::class);
 
         foreach ($this->getSingletonDrivers() as $class) {
-            $this->app->singleton($key = $this->getBindingKeyForDriver($class), $class);
+            $this->app->singleton(
+                $key = $this->getBindingKeyForDriver($class),
+                function () use ($class) {
+                    return new $class;
+                }
+            );
             $this->app->alias($key, $class);
         }
 
