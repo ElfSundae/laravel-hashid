@@ -106,12 +106,13 @@ Hashid::connection('base62');
 // Obtain the Base64 driver instance
 hashid('base64');
 Hashid::connection('base64');
+Hashid::driver('base64');
 ```
 
 There are only two methods you need to know to use any connection or driver:
 
- - `encode()` for encoding data.
- - `decode()` for decoding data.
+ - `encode($data)` for encoding data.
+ - `decode($data)` for decoding data.
 
 ```php
 hashid()->encode(123456);
@@ -120,7 +121,7 @@ hashid('base64')->decode('TGFyYXZlbA');
 
 Hashid::encode(123456);
 
-Hashid::connection('hashids')->decode('xkNDJ');
+Hashid::connection('hashids')->decode('X68fkp');
 ```
 
 And there are also two corresponding helper functions:
