@@ -1,7 +1,7 @@
 {
     "name": "elfsundae/laravel-hashid",
     "type": "library",
-    "description": "A convenient way to obfuscate your data by generating reversible, non-sequential, URL-safe identifiers.",
+    "description": "A simple, elegant way to obfuscate your data by generating reversible, non-sequential, URL-safe identifiers.",
     "keywords": ["hashid", "obfuscate", "base62", "base64", "hashids", "optimus", "URL safe"],
     "homepage": "https://github.com/ElfSundae/laravel-hashid",
     "license": "MIT",

@@ -9,7 +9,7 @@
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/ElfSundae/laravel-hashid/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/ElfSundae/laravel-hashid/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/elfsundae/laravel-hashid.svg?style=flat-square)](https://packagist.org/packages/elfsundae/laravel-hashid)
 
-Laravel Hashid provides a unified API across various drivers such as [Base62], [Base64], [Hashids] and [Optimus], with support for multiple connections or different encoding options. It offers a convenient way to obfuscate your data by generating reversible, non-sequential, URL-safe identifiers.
+Laravel Hashid provides a unified API across various drivers such as [Base62], [Base64], [Hashids] and [Optimus], with support for multiple connections or different encoding options. It offers a simple, elegant way to obfuscate your data by generating reversible, non-sequential, URL-safe identifiers.
 
 <!-- MarkdownTOC -->
 
@@ -22,6 +22,7 @@ Laravel Hashid provides a unified API across various drivers such as [Base62], [
     - [Hashids](#hashids)
     - [Hex](#hex)
     - [Optimus](#optimus)
+- [Custom Drivers](#custom-drivers)
 - [Testing](#testing)
 - [License](#license)
 
@@ -177,6 +178,63 @@ hashid_decode('TGFyYXZlbA', 'base64');
     - You may use `$ php artisan hashid:optimus` to generate needed numbers.
     - Only for integer numbers.
     - The max number can be handled correctly is `2147483647`.
+
+## Custom Drivers
+
+To create a custom Hashid driver, you only need to implement the [`ElfSundae\Laravel\Hashid\DriverInterface`](src/DriverInterface.php) interface that contains two methods: `encode` and `decode`. The constructor can optionally receive the driver configuration from a `$config` argument, and type-hinted dependencies injection is supported as well:
+
+```php
+<?php
+
+namespace App\Hashid;
+
+use ElfSundae\Laravel\Hashid\DriverInterface;
+use Illuminate\Contracts\Encryption\Encrypter;
+
+class CustomDriver implements DriverInterface
+{
+    protected $encrypter;
+
+    protected $serialize;
+
+    public function __construct(Encrypter $encrypter, array $config = [])
+    {
+        $this->encrypter = $encrypter;
+
+        $this->serialize = $config['serialize'] ?? false;
+    }
+
+    public function encode($data)
+    {
+        return $this->encrypter->encrypt($data, $this->serialize);
+    }
+
+    public function decode($data)
+    {
+        return $this->encrypter->decrypt($data, $this->serialize);
+    }
+}
+```
+
+Now you can configure the connection with this driver:
+
+```php
+'connections' => [
+
+    'custom' => [
+        'driver' => App\Hashid\CustomDriver::class,
+        'serialize' => false,
+    ],
+
+    // ...
+]
+```
+
+If you prefer a short name for your driver, just register a container binding with `hashid.driver.` prefix:
+
+```php
+$this->app->bind('hashid.driver.custom-driver', CustomDriver::class);
+```
 
 ## Testing
 
