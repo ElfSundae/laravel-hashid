@@ -22,9 +22,6 @@ Laravel Hashid provides a unified API across various drivers such as [Base62], [
     - [Hashids](#hashids)
     - [Hex](#hex)
     - [Optimus](#optimus)
-- [Extending](#extending)
-    - [Adding Custom Drivers](#adding-custom-drivers)
-    - [Extend Existing Connections Or Drivers](#extend-existing-connections-or-drivers)
 - [Testing](#testing)
 - [License](#license)
 
@@ -139,52 +136,46 @@ hashid_decode('TGFyYXZlbA', 'base64');
 
 ## Built-in Drivers
 
-### Base62
+#### Base62
 
-- Website: https://github.com/tuupola/base62
 - Drivers: `base62` , `base62_integer`
 - Configuration:
     - `characters` : 62 unique characters
+- Backend: [`tuupola/base62`][base62]
 - Notes:
     - You may use `$ php artisan hashid:alphabet` to generate random characters.
     - [GMP] is strongly recommended as it is much faster than pure PHP.
 
-### Base64
+#### Base64
 
-- Website: https://github.com/ElfSundae/urlsafe-base64
 - Drivers: `base64` , `base64_integer`
+- Backend: [`elfsundae/urlsafe-base64`][base64]
 
-### Hashids
+#### Hashids
 
-- Website: http://hashids.org/php/
 - Drivers: `hashids` , `hashids_hex` , `hashids_integer` , `hashids_string`
 - Configuration:
     - `salt`
     - `min_length`
-    - `alphabet` : Must contain at least 16 unique characters
+    - `alphabet` : At least 16 unique characters
+- Backend: [`hashids/hashids`][hashids]
 
-### Hex
+#### Hex
 
-- Drivers: `hex`, `hex_integer`
+- Drivers: `hex` , `hex_integer`
 
-### Optimus
+#### Optimus
 
-- Website: https://github.com/jenssegers/optimus
 - Drivers: `optimus`
 - Configuration:
     - `prime` : Large prime number lower than `2147483647`
     - `inverse` : The inverse prime so that `(PRIME * INVERSE) & MAXID == 1`
     - `random` : A large random integer lower than `2147483647`
+- Backend: [`jenssegers/optimus`][optimus]
 - Notes:
     - You may use `$ php artisan hashid:optimus` to generate needed numbers.
     - Only for integer numbers.
-    - The max number can be encoded or decoded correctly is `2147483647`.
-
-## Extending
-
-### Adding Custom Drivers
-
-### Extend Existing Connections Or Drivers
+    - The max number can be handled correctly is `2147483647`.
 
 ## Testing
 
