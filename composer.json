@@ -1,8 +1,8 @@
 {
     "name": "elfsundae/laravel-hashid",
     "type": "library",
-    "description": "Laravel Hashid",
-    "keywords": ["laravel", "hashid"],
+    "description": "A simple, elegant way to obfuscate your data by generating reversible, non-sequential, URL-safe identifiers.",
+    "keywords": ["hashid", "obfuscate", "base62", "base64", "hashids", "optimus", "URL safe"],
     "homepage": "https://github.com/ElfSundae/laravel-hashid",
     "license": "MIT",
     "authors": [
@@ -18,9 +18,9 @@
         "illuminate/console": "5.*",
         "tuupola/base62": "~0.9",
         "elfsundae/urlsafe-base64": "~1.1",
-        "jenssegers/optimus": "^0.2.3",
-        "phpseclib/phpseclib": "~2.0",
-        "hashids/hashids": "~2.0"
+        "hashids/hashids": "~2.0",
+        "jenssegers/optimus": "~0.2",
+        "phpseclib/phpseclib": "~2.0"
     },
     "require-dev": {
         "mockery/mockery": "^0.9.4",
