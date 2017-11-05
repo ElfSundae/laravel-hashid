@@ -23,8 +23,7 @@ Laravel Hashid provides a unified API across various drivers such as [Base62], [
     - [Hex](#hex)
     - [Optimus](#optimus)
 - [Custom Drivers](#custom-drivers)
-- [Testing](#testing)
-- [License](#license)
+- [Donation 赞赏](#donation-%E8%B5%9E%E8%B5%8F)
 
 <!-- /MarkdownTOC -->
 
@@ -91,7 +90,7 @@ Let's see an example of the configuration:
 
 ## Usage
 
-The `hashid()` helper or the `Hashid` facade may be used to interact with any of your configured connections or drivers.
+The `hashid()` helper or the `Hashid` facade may be used to interact with any of your configured connections or drivers:
 
 ```php
 use ElfSundae\Laravel\Hashid\Facades\Hashid;
@@ -233,18 +232,26 @@ Now you can configure the connection with this driver:
 If you prefer a short name for your driver, just register a container binding with `hashid.driver.` prefix:
 
 ```php
-$this->app->bind('hashid.driver.custom-driver', CustomDriver::class);
+$this->app->bind('hashid.driver.custom', CustomDriver::class);
 ```
 
-## Testing
+## Donation 赞赏
 
-```sh
-$ composer test
-```
+If you find my work useful, please consider buying me a cup of coffee :coffee: , all donations are much appreciated :heart:
 
-## License
+<p align="center">
+    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9CSWKQ4JQYUM4" target="_blank">
+        <img src="https://img.0x321.com/images/donate-paypal.jpg">
+    </a>
+</p>
 
-This package is open-sourced software licensed under the [MIT License](LICENSE.md).
+如果这个轮子对你有用，可否递我一支香烟 :smoking: ？ **赞赏是一种肯定！** 谢谢 :kissing_heart:
+
+<p align="center">
+    <img src="https://img.0x321.com/images/donate-alipay-220.png">
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <img src="https://img.0x321.com/images/donate-wechat-220.png">
+</p>
 
 [base62]: https://github.com/tuupola/base62
 [base64]: https://github.com/ElfSundae/urlsafe-base64
