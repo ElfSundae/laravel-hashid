@@ -241,16 +241,16 @@ If you find my work useful, please consider buying me a cup of coffee :coffee: ,
 
 <p align="center">
     <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9CSWKQ4JQYUM4" target="_blank">
-        <img src="https://img.0x321.com/images/donate-paypal.jpg">
+        <img src="https://img.cdn.0x321.com/images/donate-paypal.jpg">
     </a>
 </p>
 
 如果这个轮子对你有用，可否递我一支香烟 :smoking: ？ **赞赏是一种肯定！** 谢谢 :kissing_heart:
 
 <p align="center">
-    <img src="https://img.0x321.com/images/donate-alipay-220.png">
+    <img src="https://img.cdn.0x321.com/images/donate-alipay-220.png">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <img src="https://img.0x321.com/images/donate-wechat-220.png">
+    <img src="https://img.cdn.0x321.com/images/donate-wechat-220.png">
 </p>
 
 [base62]: https://github.com/tuupola/base62
