@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => 'hashids_integer',
+    'default' => env('HASHID_CONNECTION', 'hashids_integer'),
 
     /*
     |--------------------------------------------------------------------------
