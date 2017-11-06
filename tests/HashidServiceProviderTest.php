@@ -3,6 +3,7 @@
 namespace ElfSundae\Laravel\Hashid\Test;
 
 use Orchestra\Testbench\TestCase;
+use ElfSundae\Laravel\Hashid\Base64Driver;
 use ElfSundae\Laravel\Hashid\HashidManager;
 use ElfSundae\Laravel\Hashid\Facades\Hashid;
 use ElfSundae\Laravel\Hashid\HashidServiceProvider;
@@ -21,5 +22,7 @@ class HashidServiceProviderTest extends TestCase
         $manager = $this->app['hashid'];
         $this->assertSame($manager, $this->app[HashidManager::class]);
         $this->assertSame($manager, Hashid::getFacadeRoot());
+
+        $this->assertSame($this->app['hashid.driver.base64'], $this->app[Base64Driver::class]);
     }
 }
