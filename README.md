@@ -144,7 +144,7 @@ hashid_decode('TGFyYXZlbA', 'base64');
     - `characters` : 62 unique characters
 - Backend: [`tuupola/base62`][base62]
 - Notes:
-    - You may use `$ php artisan hashid:alphabet` to generate random characters.
+    - You may use the `hashid:alphabet` command to generate random characters.
     - [GMP] is strongly recommended as it is much faster than pure PHP.
 
 #### Base64
@@ -161,6 +161,7 @@ hashid_decode('TGFyYXZlbA', 'base64');
     - `alphabet` : At least 16 unique characters
 - Backend: [`hashids/hashids`][hashids]
 - Notes:
+    - You may use the `hashid:alphabet` command to generate a random alphabet.
     - [GMP] is strongly recommended.
 
 #### Hex
@@ -176,7 +177,7 @@ hashid_decode('TGFyYXZlbA', 'base64');
     - `random` : A large random integer lower than `2147483647`
 - Backend: [`jenssegers/optimus`][optimus]
 - Notes:
-    - You may use `$ php artisan hashid:optimus` to generate needed numbers.
+    - You may use the `hashid:optimus` command to generate needed numbers.
     - Only for integer numbers.
     - The max number can be handled correctly is `2147483647`.
 
