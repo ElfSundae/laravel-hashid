@@ -160,6 +160,8 @@ hashid_decode('TGFyYXZlbA', 'base64');
     - `min_length`
     - `alphabet` : At least 16 unique characters
 - Backend: [`hashids/hashids`][hashids]
+- Notes:
+    - [GMP] is strongly recommended.
 
 #### Hex
 
