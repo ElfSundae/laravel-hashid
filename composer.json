@@ -14,8 +14,8 @@
     ],
     "require": {
         "php": ">=5.6.4",
-        "illuminate/support": "5.0.* || 5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.*",
-        "illuminate/console": "5.0.* || 5.1.* || 5.2.* || 5.3.* || 5.4.* || 5.5.*",
+        "illuminate/support": "~5.0,<5.6",
+        "illuminate/console": "~5.0,<5.6",
         "tuupola/base62": "~0.9",
         "elfsundae/urlsafe-base64": "~1.1",
         "hashids/hashids": "~2.0",
