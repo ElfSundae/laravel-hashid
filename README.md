@@ -255,6 +255,6 @@ If you find my work useful, please consider buying me a cup of coffee :coffee: ,
 
 [base62]: https://github.com/tuupola/base62
 [base64]: https://github.com/ElfSundae/urlsafe-base64
-[hashids]: http://hashids.org/php/
+[hashids]: https://github.com/ivanakimov/hashids.php
 [optimus]: https://github.com/jenssegers/optimus
 [gmp]: https://secure.php.net/gmp
