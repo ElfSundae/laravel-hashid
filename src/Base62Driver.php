@@ -23,7 +23,7 @@ class Base62Driver implements DriverInterface
     protected $integer = false;
 
     /**
-     * Create a new hashid driver instance.
+     * Create a new Base62 driver instance.
      *
      * @param  array  $config
      */

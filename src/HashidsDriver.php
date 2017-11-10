@@ -15,7 +15,7 @@ class HashidsDriver implements DriverInterface
     protected $hashids;
 
     /**
-     * Create a new hashid driver instance.
+     * Create a new Hashids driver instance.
      *
      * @param  array  $config
      */

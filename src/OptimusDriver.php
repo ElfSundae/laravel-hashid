@@ -15,7 +15,7 @@ class OptimusDriver implements DriverInterface
     protected $optimus;
 
     /**
-     * Create a new hashid driver instance.
+     * Create a new Optimus driver instance.
      *
      * @param  array  $config
      *
