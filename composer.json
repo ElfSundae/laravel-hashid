@@ -58,6 +58,6 @@
         }
     },
     "suggest": {
-        "elfsundae/laravel-hashid-uuid": "Shorten UUID encoding",
+        "elfsundae/laravel-hashid-uuid": "Shorten UUID encoding"
     }
 }
