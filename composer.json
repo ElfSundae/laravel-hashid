@@ -56,5 +56,8 @@
                 "Hashid": "ElfSundae\\Laravel\\Hashid\\Facades\\Hashid"
             }
         }
+    },
+    "suggest": {
+        "elfsundae/laravel-hashid-uuid": "Shorten UUID encoding",
     }
 }
