@@ -23,7 +23,7 @@
         "phpseclib/phpseclib": "~2.0"
     },
     "require-dev": {
-        "mockery/mockery": "^0.9.4",
+        "mockery/mockery": "~1.0",
         "phpunit/phpunit": "~5.4|~6.0",
         "orchestra/testbench": "~3.0",
         "paragonie/random_compat": "~1.0|~2.0"
