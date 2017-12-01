@@ -9,17 +9,12 @@ class CommandsTest extends TestCase
 {
     public function testAlphabetGenerateCommand()
     {
-        $this->assertSame(0, $this->callCommand('hashid:alphabet'));
+        $this->assertSame(0, $this->artisan('hashid:alphabet'));
     }
 
     public function testOptimusGenerateCommand()
     {
-        $this->assertSame(0, $this->callCommand('hashid:optimus'));
-    }
-
-    protected function callCommand($command)
-    {
-        return $this->app['Illuminate\Contracts\Console\Kernel']->call($command);
+        $this->assertSame(0, $this->artisan('hashid:optimus'));
     }
 
     protected function getPackageProviders($app)
