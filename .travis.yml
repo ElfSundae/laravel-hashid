@@ -7,7 +7,7 @@ php:
 
 env:
   global:
-    - PHPUNIT_VERSION="~5.4"
+    - PHPUNIT_VERSION="~5.7"
   matrix:
     - LARAVEL="5.0.*"
     - LARAVEL="5.1.*"
