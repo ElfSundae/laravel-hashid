@@ -29,7 +29,7 @@ class HashidServiceProvider extends ServiceProvider
     protected function setupAssets()
     {
         if ($this->app instanceof LumenApplication) {
-            $this->app->configure('hashid');
+            $this->app->configure('hashid'); // @codeCoverageIgnore
         }
 
         $this->mergeConfigFrom($config = __DIR__.'/../config/hashid.php', 'hashid');
