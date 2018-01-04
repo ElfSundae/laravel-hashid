@@ -1,5 +1,12 @@
+build:
+    nodes:
+        analysis:
+            tests:
+                override: [php-scrutinizer-run]
+
 filter:
-    excluded_paths: [tests/*]
+    excluded_paths:
+        - "tests/"
 
 checks:
     php:
@@ -18,4 +25,6 @@ checks:
         fix_doc_comments: true
 
 tools:
-    external_code_coverage: true
+    external_code_coverage:
+        timeout: 1200
+        runs: 6
