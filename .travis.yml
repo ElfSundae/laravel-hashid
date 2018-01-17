@@ -1,29 +1,33 @@
+dist: trusty
 language: php
 
 php:
   - 5.6
   - 7.0
   - 7.1
+  - 7.2
+  - hhvm
 
-env:
-  global:
-    - PHPUNIT_VERSION="~5.7"
-  matrix:
-    - LARAVEL="5.0.*"
-    - LARAVEL="5.1.*"
-    - LARAVEL="5.2.*"
-    - LARAVEL="5.3.*"
-    - LARAVEL="5.4.*"
-    - LARAVEL="5.5.*" PHPUNIT_VERSION="~6.0" PHP_MIN_VERSION="7.0"
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+matrix:
+  include:
+    - php: 5.6
+      env: 'COMPOSER_FLAGS="--prefer-lowest --prefer-stable"'
 
 before_script:
-  - if [[ ${TRAVIS_PHP_VERSION:0:3} < ${PHP_MIN_VERSION} ]]; then phpenv global ${PHP_MIN_VERSION}; fi
-  - composer self-update
-  - travis_retry composer require laravel/framework:${LARAVEL} phpunit/phpunit:${PHPUNIT_VERSION} --no-interaction
+  - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-dist --no-suggest
 
 script:
   - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
 
 after_script:
-  - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+  - |
+    if [[ "$TRAVIS_PHP_VERSION" != 'hhvm' && "$TRAVIS_PHP_VERSION" != '7.0' ]]; then
+      wget https://scrutinizer-ci.com/ocular.phar
+      php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+    fi
