@@ -3,7 +3,7 @@
 use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
 
-$finder = Finder::create()->in(__DIR__);
+$finder = Finder::create()->in(__DIR__)->exclude('resources');
 
 $rules = [
     'array_syntax' => ['syntax' => 'short'],
