@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.1.0 (2018-01-18)
+
+- Updated dependences versions: `hashids`, `optimus`
+
 ## 1.0.1 (2017-11-12)
 
 - Optimized `composer.json`
