@@ -14,8 +14,8 @@
     ],
     "require": {
         "php": ">=5.6.4",
-        "illuminate/support": "~5.0,<5.6",
-        "illuminate/console": "~5.0,<5.6",
+        "illuminate/support": "~5.0,<5.7",
+        "illuminate/console": "~5.0,<5.7",
         "tuupola/base62": "~0.9",
         "elfsundae/urlsafe-base64": "~1.1",
         "hashids/hashids": "^2.0.4",
@@ -24,7 +24,7 @@
     },
     "require-dev": {
         "mockery/mockery": "~1.0",
-        "phpunit/phpunit": "~5.7|~6.0",
+        "phpunit/phpunit": "~5.7|~6.0|~7.0",
         "orchestra/testbench": "~3.0",
         "paragonie/random_compat": "~1.0|~2.0"
     },
@@ -59,5 +59,7 @@
     },
     "suggest": {
         "elfsundae/laravel-hashid-uuid": "Shorten UUID encoding"
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
