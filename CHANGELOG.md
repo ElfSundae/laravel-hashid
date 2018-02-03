@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.2.0 (2018-02-04)
+
+- Support Laravel 5.6
+
 ## 1.1.0 (2018-01-18)
 
 - Updated dependences versions: `hashids`, `optimus`
