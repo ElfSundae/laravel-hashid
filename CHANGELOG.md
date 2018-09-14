@@ -2,7 +2,8 @@
 
 ## unreleased
 
-- Support Laravel 5.7
+- Added Laravel 5.7 support
+- Added Hashids 3.0 support
 
 ## 1.2.0 (2018-02-04)
 

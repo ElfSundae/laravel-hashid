@@ -18,7 +18,7 @@
         "illuminate/console": "~5.0,<5.8",
         "tuupola/base62": "~0.9",
         "elfsundae/urlsafe-base64": "~1.1",
-        "hashids/hashids": "^2.0.4",
+        "hashids/hashids": "^2.0.4|~3.0",
         "jenssegers/optimus": "^0.2.3",
         "phpseclib/phpseclib": "~2.0"
     },
