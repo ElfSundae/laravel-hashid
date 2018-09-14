@@ -1,5 +1,9 @@
 # Release Notes
 
+## unreleased
+
+- Support Laravel 5.7
+
 ## 1.2.0 (2018-02-04)
 
 - Support Laravel 5.6
