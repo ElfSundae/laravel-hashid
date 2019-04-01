@@ -4,8 +4,8 @@ Thumbs.db
 /build
 composer.phar
 composer.lock
+.php_cs.cache
 /phpunit.xml
 .phpunit.result.cache
 /.idea
 /.vscode
-
