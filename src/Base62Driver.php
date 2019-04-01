@@ -16,13 +16,6 @@ class Base62Driver implements DriverInterface
     protected $base62;
 
     /**
-     * Indicates integer encoding.
-     *
-     * @var bool
-     */
-    protected $integer = false;
-
-    /**
      * Create a new Base62 driver instance.
      *
      * @param  array  $config
@@ -38,22 +31,22 @@ class Base62Driver implements DriverInterface
     /**
      * Encode the data.
      *
-     * @param  mixed  $data
+     * @param  string  $data
      * @return string
      */
     public function encode($data)
     {
-        return $this->base62->encode($data, $this->integer);
+        return $this->base62->encode($data);
     }
 
     /**
      * Decode the data.
      *
-     * @param  mixed  $data
-     * @return mixed
+     * @param  string  $data
+     * @return string
      */
     public function decode($data)
     {
-        return $this->base62->decode($data, $this->integer);
+        return $this->base62->decode($data);
     }
 }
