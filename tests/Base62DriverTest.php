@@ -21,6 +21,7 @@ class Base62DriverTest extends DriverTestCase
         $this->assertEncodedData('Hashid', 'Mb6pKATc');
         $this->runForRandomBytes();
         $this->runForLeadingZeroBytes();
+        $this->runForLeadingNullTerminatorBytes();
         $this->assertUniformEncoding(random_bytes(128));
 
         $this->assertEncodedData(987654321, '14q60P', $this->integerDriver);
@@ -35,6 +36,7 @@ class Base62DriverTest extends DriverTestCase
         ];
         $this->runForRandomBytes($config);
         $this->runForLeadingZeroBytes($config);
+        $this->runForLeadingNullTerminatorBytes($config);
         $this->assertUniformEncoding(random_bytes(128), $config);
         $this->runForIntegers($this->integerDriver, $config);
         $this->assertUniformEncoding(random_int(0, PHP_INT_MAX), $this->integerDriver, $config);
