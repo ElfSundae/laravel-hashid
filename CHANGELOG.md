@@ -1,6 +1,6 @@
 # Release Notes
 
-## unreleased
+## 1.3.0 (2019-04-02)
 
 - Removed PHP 5 support
 - Added support for Laravel 5.7 and 5.8
