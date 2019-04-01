@@ -1,4 +1,11 @@
+.DS_Store
+Thumbs.db
 /vendor
 /build
 composer.phar
 composer.lock
+/phpunit.xml
+.phpunit.result.cache
+/.idea
+/.vscode
+
