@@ -2,8 +2,11 @@
 
 ## unreleased
 
-- Added Laravel 5.7 support
-- Added Hashids 3.0 support
+- Removed PHP 5 support
+- Added support for Laravel 5.7 and 5.8
+- Added support for `tuupola/base62` 2.x
+- Added support for `hashids/hashids` 3.x
+- Added support for `jenssegers/optimus` 1.x
 
 ## 1.2.0 (2018-02-04)
 
