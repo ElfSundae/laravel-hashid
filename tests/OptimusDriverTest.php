@@ -10,7 +10,7 @@ class OptimusDriverTest extends DriverTestCase
 {
     protected $driver = OptimusDriver::class;
 
-    protected $maxInteger = Optimus::MAX_INT;
+    protected $maxInteger = 2 ** Optimus::DEFAULT_SIZE - 1;
 
     public function testInstantiation()
     {

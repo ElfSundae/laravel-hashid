@@ -19,7 +19,7 @@
         "tuupola/base62": "~2.0",
         "elfsundae/urlsafe-base64": "~1.1",
         "hashids/hashids": "^2.0.4|~3.0",
-        "jenssegers/optimus": "^0.2.3",
+        "jenssegers/optimus": "~1.0",
         "phpseclib/phpseclib": "~2.0"
     },
     "require-dev": {
