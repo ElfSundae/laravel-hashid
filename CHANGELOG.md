@@ -1,6 +1,6 @@
 # Release Notes
 
-## 1.3.1 (2019-09-15)
+## 1.3.2 (2019-09-15)
 
 - Add support for Laravel 6, Hashids 4
 
