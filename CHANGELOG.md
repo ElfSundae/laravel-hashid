@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.3.1 (2019-09-15)
+
+- Add support for Laravel 6, Hashids 4
+
 ## 1.3.0 (2019-04-02)
 
 - Removed PHP 5 support
