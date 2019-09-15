@@ -23,7 +23,8 @@ Laravel Hashid provides a unified API across various drivers such as [Base62], [
     - [Hex](#hex)
     - [Optimus](#optimus)
 - [Custom Drivers](#custom-drivers)
-- [Donation 赞赏](#donation-%E8%B5%9E%E8%B5%8F)
+- [Testing](#testing)
+- [License](#license)
 
 <!-- /MarkdownTOC -->
 
@@ -238,23 +239,15 @@ If you prefer a short name for your driver, just register a container binding wi
 $this->app->bind('hashid.driver.custom', CustomDriver::class);
 ```
 
-## Donation 赞赏
+## Testing
 
-If you find my work useful, please consider buying me a cup of coffee :coffee: , all donations are much appreciated :heart:
+```sh
+$ composer test
+```
 
-<p align="center">
-    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9CSWKQ4JQYUM4" target="_blank">
-        <img src="https://img.0x321.com/images/donate-paypal.jpg">
-    </a>
-</p>
+## License
 
-如果这个轮子对你有用，可否递我一支香烟 :smoking: ？ **赞赏是一种肯定！** 谢谢 :kissing_heart:
-
-<p align="center">
-    <img src="https://img.0x321.com/images/donate-alipay-220.png">
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <img src="https://img.0x321.com/images/donate-wechat-220.png">
-</p>
+This package is open-sourced software licensed under the [MIT License](LICENSE.md).
 
 [base62]: https://github.com/tuupola/base62
 [base64]: https://github.com/ElfSundae/urlsafe-base64
