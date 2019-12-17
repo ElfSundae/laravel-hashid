@@ -34,7 +34,11 @@ class OptimusGenerateCommand extends Command
             (int) $this->option('prime')
         );
 
-        $this->table(['prime', 'inverse', 'random'], $numbers);
+        foreach ($numbers as [$prime, $inverse, $random]) {
+            $this->line("OPTIMUS_PRIME={$prime}");
+            $this->line("OPTIMUS_INVERSE={$inverse}");
+            $this->line("OPTIMUS_RANDOM={$random}");
+        }
     }
 
     /**
