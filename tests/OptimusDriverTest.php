@@ -2,9 +2,9 @@
 
 namespace ElfSundae\Laravel\Hashid\Test;
 
+use ElfSundae\Laravel\Hashid\OptimusDriver;
 use Jenssegers\Optimus\Energon;
 use Jenssegers\Optimus\Optimus;
-use ElfSundae\Laravel\Hashid\OptimusDriver;
 
 class OptimusDriverTest extends DriverTestCase
 {

@@ -2,9 +2,9 @@
 
 namespace ElfSundae\Laravel\Hashid\Test;
 
+use ElfSundae\Laravel\Hashid\HashidServiceProvider;
 use Mockery as m;
 use Orchestra\Testbench\TestCase;
-use ElfSundae\Laravel\Hashid\HashidServiceProvider;
 
 class HelpersTest extends TestCase
 {

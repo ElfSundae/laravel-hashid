@@ -3,8 +3,8 @@
 namespace ElfSundae\Laravel\Hashid;
 
 use Illuminate\Support\Arr;
-use InvalidArgumentException;
 use Illuminate\Support\Manager;
+use InvalidArgumentException;
 
 class HashidManager extends Manager
 {
