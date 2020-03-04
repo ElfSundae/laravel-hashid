@@ -2,8 +2,8 @@
 
 namespace ElfSundae\Laravel\Hashid;
 
-use Illuminate\Support\Str;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Str;
 use Laravel\Lumen\Application as LumenApplication;
 
 class HashidServiceProvider extends ServiceProvider

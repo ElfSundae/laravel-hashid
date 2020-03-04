@@ -2,9 +2,9 @@
 
 namespace ElfSundae\Laravel\Hashid\Test;
 
-use Orchestra\Testbench\TestCase;
-use Illuminate\Contracts\Console\Kernel;
 use ElfSundae\Laravel\Hashid\HashidServiceProvider;
+use Illuminate\Contracts\Console\Kernel;
+use Orchestra\Testbench\TestCase;
 
 class CommandsTest extends TestCase
 {

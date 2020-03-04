@@ -2,9 +2,9 @@
 
 namespace ElfSundae\Laravel\Hashid\Test;
 
-use Orchestra\Testbench\TestCase;
 use ElfSundae\Laravel\Hashid\HashidManager;
 use Illuminate\Contracts\Container\Container;
+use Orchestra\Testbench\TestCase;
 
 class HashidManagerTest extends TestCase
 {

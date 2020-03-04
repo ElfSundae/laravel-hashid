@@ -4,8 +4,8 @@ namespace ElfSundae\Laravel\Hashid\Test;
 
 use ElfSundae\Laravel\Hashid\HashidsDriver;
 use ElfSundae\Laravel\Hashid\HashidsHexDriver;
-use ElfSundae\Laravel\Hashid\HashidsStringDriver;
 use ElfSundae\Laravel\Hashid\HashidsIntegerDriver;
+use ElfSundae\Laravel\Hashid\HashidsStringDriver;
 
 class HashidsDriverTest extends DriverTestCase
 {

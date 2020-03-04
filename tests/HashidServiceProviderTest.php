@@ -2,11 +2,11 @@
 
 namespace ElfSundae\Laravel\Hashid\Test;
 
-use Orchestra\Testbench\TestCase;
 use ElfSundae\Laravel\Hashid\Base64Driver;
-use ElfSundae\Laravel\Hashid\HashidManager;
 use ElfSundae\Laravel\Hashid\Facades\Hashid;
+use ElfSundae\Laravel\Hashid\HashidManager;
 use ElfSundae\Laravel\Hashid\HashidServiceProvider;
+use Orchestra\Testbench\TestCase;
 
 class HashidServiceProviderTest extends TestCase
 {
