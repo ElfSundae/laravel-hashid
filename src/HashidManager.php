@@ -9,6 +9,28 @@ use InvalidArgumentException;
 class HashidManager extends Manager
 {
     /**
+     * The container instance.
+     *
+     * The $app property was removed in Laravel 8.x.
+     *
+     * @var \Illuminate\Contracts\Container\Container
+     */
+    protected $app;
+
+    /**
+     * Create a new manager instance.
+     *
+     * @param  \Illuminate\Contracts\Container\Container  $container
+     * @return void
+     */
+    public function __construct($container)
+    {
+        parent::__construct($container);
+
+        $this->app = $container;
+    }
+
+    /**
      * Get a hashid connection instance.
      *
      * @param  string|null  $name
