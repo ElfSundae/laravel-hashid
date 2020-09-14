@@ -1,5 +1,13 @@
 # Release Notes
 
+## 1.5.0 (2020-09-13)
+
+- Add support for Laravel 8
+
+## 1.4.0 (2020-03-04)
+
+- Add support for Laravel 7
+
 ## 1.3.2 (2019-09-15)
 
 - Add support for Laravel 6, Hashids 4
