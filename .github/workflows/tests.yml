@@ -13,16 +13,19 @@ jobs:
       fail-fast: false
       matrix:
         php: [7.1, 7.2, 7.3, 7.4]
-        stability: [prefer-lowest, prefer-stable]
+        stability: [--prefer-stable]
+        include:
+          - php: 7.1
+            stability: --prefer-lowest
 
-    name: PHP ${{ matrix.php }} - ${{ matrix.stability }}
+    name: PHP ${{ matrix.php }} ${{ matrix.stability }}
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Install dependencies
-        run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction --no-progress --no-suggest
+        run: composer update ${{ matrix.stability }} --prefer-dist --no-interaction --no-progress --no-suggest
 
       - name: Execute tests
         run: vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
