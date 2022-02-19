@@ -1,0 +1,20 @@
+ignore_branches:
+    - gh-pages
+
+global_exclude_dirs:
+    - vendor
+    - vendors
+    - test
+    - tests
+    - Tests
+    - spec
+    - features
+    - Fixtures
+    - DataFixtures
+    - var
+
+rules:
+    php.use_global_variable_or_function:
+        enabled: false
+    php.object_parameter_not_type_hinted:
+        enabled: false

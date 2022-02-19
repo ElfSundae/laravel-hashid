@@ -4,7 +4,7 @@
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Build Status](https://github.com/ElfSundae/laravel-hashid/workflows/tests/badge.svg)](https://github.com/ElfSundae/laravel-hashid/actions)
 [![StyleCI](https://styleci.io/repos/106044131/shield)](https://styleci.io/repos/106044131)
-[![SensioLabsInsight](https://img.shields.io/sensiolabs/i/8373554a-0842-488a-818a-b90badef6a58.svg?style=flat-square)](https://insight.sensiolabs.com/projects/8373554a-0842-488a-818a-b90badef6a58)
+[![SymfonyInsight Grade](https://img.shields.io/symfony/i/grade/5ecfdb3d-b2c4-47ca-b50b-4f041fe42f4f?style=flat-square)](https://insight.symfony.com/projects/5ecfdb3d-b2c4-47ca-b50b-4f041fe42f4f)
 [![Quality Score](https://img.shields.io/scrutinizer/g/ElfSundae/laravel-hashid.svg?style=flat-square)](https://scrutinizer-ci.com/g/ElfSundae/laravel-hashid)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/ElfSundae/laravel-hashid/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/ElfSundae/laravel-hashid/?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/elfsundae/laravel-hashid.svg?style=flat-square)](https://packagist.org/packages/elfsundae/laravel-hashid)
