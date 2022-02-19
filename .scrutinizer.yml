@@ -7,7 +7,7 @@ build:
                 override: [php-scrutinizer-run]
 
 filter:
-    excluded_paths: [tests/*]
+    excluded_paths: [tests/*, .php-cs-fixer.dist.php]
 
 checks:
     php:
