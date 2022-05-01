@@ -1,5 +1,10 @@
 # Release Notes
 
+## 1.7.1 (2022-05-02)
+
+- Add PHPDoc for `Hashid` facade
+- Override `setContainer()` method for `HashidManager`
+
 ## 1.7.0 (2022-02-18)
 
 - Add support for Laravel 9
