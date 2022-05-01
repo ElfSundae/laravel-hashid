@@ -1,10 +1,10 @@
 {
     "name": "elfsundae/laravel-hashid",
-    "type": "library",
     "description": "A simple, elegant way to obfuscate your data by generating reversible, non-sequential, URL-safe identifiers.",
+    "license": "MIT",
+    "type": "library",
     "keywords": ["hashid", "obfuscate", "base62", "base64", "hashids", "optimus", "URL safe"],
     "homepage": "https://github.com/ElfSundae/laravel-hashid",
-    "license": "MIT",
     "authors": [
         {
             "name": "Elf Sundae",
@@ -26,6 +26,11 @@
         "phpunit/phpunit": "^5.7|^6.0|^7.0|^8.0|^9.0",
         "orchestra/testbench": "^3.0|^4.0|^5.0|^6.0|^7.0"
     },
+    "suggest": {
+        "elfsundae/laravel-hashid-uuid": "Shorten UUID encoding"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "ElfSundae\\Laravel\\Hashid\\": "src/"
@@ -38,9 +43,6 @@
         "psr-4": {
             "ElfSundae\\Laravel\\Hashid\\Test\\": "tests/"
         }
-    },
-    "scripts": {
-        "test": "vendor/bin/phpunit"
     },
     "extra": {
         "branch-alias": {
@@ -55,9 +57,7 @@
             }
         }
     },
-    "suggest": {
-        "elfsundae/laravel-hashid-uuid": "Shorten UUID encoding"
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    "scripts": {
+        "test": "vendor/bin/phpunit"
+    }
 }
