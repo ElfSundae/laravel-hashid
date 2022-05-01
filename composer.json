@@ -13,18 +13,18 @@
         }
     ],
     "require": {
-        "php": "~7.1|~8.0",
-        "illuminate/support": "~5.0|~6.0|~7.0|~8.0|~9.0",
-        "illuminate/console": "~5.0|~6.0|~7.0|~8.0|~9.0",
-        "tuupola/base62": "~2.0",
-        "elfsundae/urlsafe-base64": "~1.1",
-        "hashids/hashids": "^2.0.4|~3.0|~4.0",
-        "jenssegers/optimus": "~1.0"
+        "php": "^7.1|^8.0",
+        "illuminate/support": "^5.0|^6.0|^7.0|^8.0|^9.0",
+        "illuminate/console": "^5.0|^6.0|^7.0|^8.0|^9.0",
+        "tuupola/base62": "^2.0",
+        "elfsundae/urlsafe-base64": "^1.1",
+        "hashids/hashids": "^2.0.4|^3.0|^4.0",
+        "jenssegers/optimus": "^1.0"
     },
     "require-dev": {
-        "mockery/mockery": "~1.0",
-        "phpunit/phpunit": "~5.7|~6.0|~7.0|~8.0|~9.0",
-        "orchestra/testbench": "~3.0|~4.0|~5.0|~6.0|~7.0"
+        "mockery/mockery": "^1.0",
+        "phpunit/phpunit": "^5.7|^6.0|^7.0|^8.0|^9.0",
+        "orchestra/testbench": "^3.0|^4.0|^5.0|^6.0|^7.0"
     },
     "autoload": {
         "psr-4": {
