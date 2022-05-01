@@ -2,6 +2,7 @@
 
 namespace ElfSundae\Laravel\Hashid;
 
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Manager;
 use InvalidArgumentException;
@@ -185,5 +186,15 @@ class HashidManager extends Manager
         $makeWith = method_exists($this->app, 'makeWith') ? 'makeWith' : 'make';
 
         return $this->app->$makeWith($key, $parameters);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setContainer(Container $container)
+    {
+        $this->app = $container;
+
+        return parent::setContainer($container);
     }
 }
