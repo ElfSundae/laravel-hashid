@@ -5,7 +5,7 @@ if (! function_exists('hashid')) {
      * Get a hashid connection instance.
      *
      * @param  string|null  $name
-     * @return mixed
+     * @return \ElfSundae\Laravel\Hashid\DriverInterface
      */
     function hashid($name = null)
     {
