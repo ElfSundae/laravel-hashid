@@ -1,5 +1,10 @@
 # Release Notes
 
+## 1.7.2 (2023-05-16)
+
+- Add support for Laravel 10
+- Add support for Hashids 5
+
 ## 1.7.1 (2022-05-02)
 
 - Add PHPDoc for `Hashid` facade
