@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.7.3 (2024-10-24)
+
+- Add support for Laravel 11
+
 ## 1.7.2 (2023-05-16)
 
 - Add support for Laravel 10
