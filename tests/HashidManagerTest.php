@@ -197,7 +197,7 @@ class TestDriver
     public $container;
     public $config;
 
-    public function __construct(Container $container = null, $config = null)
+    public function __construct(?Container $container = null, $config = null)
     {
         $this->container = $container;
         $this->config = $config;
